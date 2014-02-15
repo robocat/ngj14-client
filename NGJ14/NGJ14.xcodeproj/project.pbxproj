@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		13B0DA0ACB1348B3A0415497 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C26DAF245A4D84890C3170 /* libPods.a */; };
-		3E474DE018AFAE8E00D12DFF /* ZKSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E474DDF18AFAE8E00D12DFF /* ZKSprite.m */; };
 		3E4A0D9618AF8D6100FA58DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9518AF8D6100FA58DC /* Foundation.framework */; };
 		3E4A0D9818AF8D6100FA58DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9718AF8D6100FA58DC /* CoreGraphics.framework */; };
 		3E4A0D9A18AF8D6100FA58DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9918AF8D6100FA58DC /* UIKit.framework */; };
@@ -27,7 +26,6 @@
 		3E4A0DC818AF8D6100FA58DC /* NGJ14Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0DC718AF8D6100FA58DC /* NGJ14Tests.m */; };
 		3E4F7B3C18AFCB8A00A303D3 /* ZKPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F7B3B18AFCB8A00A303D3 /* ZKPerson.m */; };
 		3E4F7B3E18AFD11300A303D3 /* ManImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */; };
-		3E90A84918AFB7DF00EF0FFB /* ZKGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */; };
 		FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E40618AFBE83005F2BB3 /* ZKConnection.m */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E474DDE18AFAE8E00D12DFF /* ZKSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKSprite.h; sourceTree = "<group>"; };
-		3E474DDF18AFAE8E00D12DFF /* ZKSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSprite.m; sourceTree = "<group>"; };
 		3E4A0D9218AF8D6100FA58DC /* NGJ14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGJ14.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4A0D9518AF8D6100FA58DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E4A0D9718AF8D6100FA58DC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,7 +56,7 @@
 		3E4A0DAD18AF8D6100FA58DC /* ZKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKViewController.m; sourceTree = "<group>"; };
 		3E4A0DAF18AF8D6100FA58DC /* ZKMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKMyScene.h; sourceTree = "<group>"; };
 		3E4A0DB018AF8D6100FA58DC /* ZKMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKMyScene.m; sourceTree = "<group>"; };
-		3E4A0DB418AF8D6100FA58DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3E4A0DB418AF8D6100FA58DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = NGJ14/Images.xcassets; sourceTree = "<group>"; };
 		3E4A0DBA18AF8D6100FA58DC /* NGJ14Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NGJ14Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4A0DBB18AF8D6100FA58DC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3E4A0DC318AF8D6100FA58DC /* NGJ14Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NGJ14Tests-Info.plist"; sourceTree = "<group>"; };
@@ -68,9 +64,7 @@
 		3E4A0DC718AF8D6100FA58DC /* NGJ14Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGJ14Tests.m; sourceTree = "<group>"; };
 		3E4F7B3A18AFCB8A00A303D3 /* ZKPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPerson.h; sourceTree = "<group>"; };
 		3E4F7B3B18AFCB8A00A303D3 /* ZKPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPerson.m; sourceTree = "<group>"; };
-		3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ManImages.atlas; sourceTree = "<group>"; };
-		3E90A84718AFB7DF00EF0FFB /* ZKGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKGameController.h; sourceTree = "<group>"; };
-		3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKGameController.m; sourceTree = "<group>"; };
+		3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = ManImages.atlas; path = NGJ14/ManImages.atlas; sourceTree = "<group>"; };
 		A1C26DAF245A4D84890C3170 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE459B0B860743728BEDC7F5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FF12E40518AFBE83005F2BB3 /* ZKConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKConnection.h; sourceTree = "<group>"; };
@@ -106,7 +100,9 @@
 		3E4A0D8918AF8D6000FA58DC = {
 			isa = PBXGroup;
 			children = (
+				FF12E40818AFE138005F2BB3 /* Resources */,
 				3E4A0D9D18AF8D6100FA58DC /* NGJ14 */,
+				3E4A0D9E18AF8D6100FA58DC /* Supporting Files */,
 				3E4A0DC118AF8D6100FA58DC /* NGJ14Tests */,
 				3E4A0D9418AF8D6100FA58DC /* Frameworks */,
 				3E4A0D9318AF8D6100FA58DC /* Products */,
@@ -139,20 +135,12 @@
 		3E4A0D9D18AF8D6100FA58DC /* NGJ14 */ = {
 			isa = PBXGroup;
 			children = (
-				3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */,
-				3E4A0DB418AF8D6100FA58DC /* Images.xcassets */,
-				3E4A0D9E18AF8D6100FA58DC /* Supporting Files */,
 				3E4A0DA618AF8D6100FA58DC /* ZKAppDelegate.h */,
 				3E4A0DA718AF8D6100FA58DC /* ZKAppDelegate.m */,
-				3E4A0DA918AF8D6100FA58DC /* Main.storyboard */,
 				3E4A0DAC18AF8D6100FA58DC /* ZKViewController.h */,
 				3E4A0DAD18AF8D6100FA58DC /* ZKViewController.m */,
 				3E4A0DAF18AF8D6100FA58DC /* ZKMyScene.h */,
 				3E4A0DB018AF8D6100FA58DC /* ZKMyScene.m */,
-				3E474DDE18AFAE8E00D12DFF /* ZKSprite.h */,
-				3E474DDF18AFAE8E00D12DFF /* ZKSprite.m */,
-				3E90A84718AFB7DF00EF0FFB /* ZKGameController.h */,
-				3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */,
 				FF12E40518AFBE83005F2BB3 /* ZKConnection.h */,
 				FF12E40618AFBE83005F2BB3 /* ZKConnection.m */,
 				3E4F7B3A18AFCB8A00A303D3 /* ZKPerson.h */,
@@ -170,6 +158,7 @@
 				3E4A0DA518AF8D6100FA58DC /* NGJ14-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = NGJ14;
 			sourceTree = "<group>";
 		};
 		3E4A0DC118AF8D6100FA58DC /* NGJ14Tests */ = {
@@ -188,6 +177,16 @@
 				3E4A0DC418AF8D6100FA58DC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FF12E40818AFE138005F2BB3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E4A0DA918AF8D6100FA58DC /* Main.storyboard */,
+				3E4A0DB418AF8D6100FA58DC /* Images.xcassets */,
+				3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,13 +323,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E90A84918AFB7DF00EF0FFB /* ZKGameController.m in Sources */,
 				3E4F7B3C18AFCB8A00A303D3 /* ZKPerson.m in Sources */,
 				3E4A0DAE18AF8D6100FA58DC /* ZKViewController.m in Sources */,
 				3E4A0DA418AF8D6100FA58DC /* main.m in Sources */,
 				FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */,
 				3E4A0DA818AF8D6100FA58DC /* ZKAppDelegate.m in Sources */,
-				3E474DE018AFAE8E00D12DFF /* ZKSprite.m in Sources */,
 				3E4A0DB118AF8D6100FA58DC /* ZKMyScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +365,7 @@
 				3E4A0DAA18AF8D6100FA58DC /* Base */,
 			);
 			name = Main.storyboard;
+			path = NGJ14;
 			sourceTree = "<group>";
 		};
 		3E4A0DC418AF8D6100FA58DC /* InfoPlist.strings */ = {

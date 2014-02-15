@@ -27,14 +27,9 @@ typedef enum {
 @property (assign) CGPoint position;
 @property (assign) ZKWalkingDirection direction;
 
-@property (strong) NSArray *walkLeftFrames;
-@property (strong) NSArray *walkRightFrames;
-@property (strong) NSArray *walkUpFrames;
-@property (strong) NSArray *walkDownFrames;
++ (ZKPerson *)person;
 
-
-- (id)initPerson;
-
-
+- (void)startWalking;
+- (void)stopWalking;
 
 @end
