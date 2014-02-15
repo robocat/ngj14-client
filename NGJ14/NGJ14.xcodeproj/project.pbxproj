@@ -26,7 +26,11 @@
 		3E4A0DBE18AF8D6100FA58DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9918AF8D6100FA58DC /* UIKit.framework */; };
 		3E4A0DC618AF8D6100FA58DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A0DC418AF8D6100FA58DC /* InfoPlist.strings */; };
 		3E4A0DC818AF8D6100FA58DC /* NGJ14Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0DC718AF8D6100FA58DC /* NGJ14Tests.m */; };
+<<<<<<< HEAD
 		3E90A84918AFB7DF00EF0FFB /* ZKGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */; };
+=======
+		FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E40618AFBE83005F2BB3 /* ZKConnection.m */; };
+>>>>>>> 4f5411610bab2daf866120c9f2c2f8c9edc6e9bb
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,8 @@
 		3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKGameController.m; sourceTree = "<group>"; };
 		A1C26DAF245A4D84890C3170 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE459B0B860743728BEDC7F5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		FF12E40518AFBE83005F2BB3 /* ZKConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKConnection.h; sourceTree = "<group>"; };
+		FF12E40618AFBE83005F2BB3 /* ZKConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKConnection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +151,13 @@
 				3E4A0DB218AF8D6100FA58DC /* Spaceship.png */,
 				3E474DDE18AFAE8E00D12DFF /* ZKSprite.h */,
 				3E474DDF18AFAE8E00D12DFF /* ZKSprite.m */,
+<<<<<<< HEAD
 				3E90A84718AFB7DF00EF0FFB /* ZKGameController.h */,
 				3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */,
+=======
+				FF12E40518AFBE83005F2BB3 /* ZKConnection.h */,
+				FF12E40618AFBE83005F2BB3 /* ZKConnection.m */,
+>>>>>>> 4f5411610bab2daf866120c9f2c2f8c9edc6e9bb
 			);
 			path = NGJ14;
 			sourceTree = "<group>";
@@ -317,6 +328,7 @@
 				3E90A84918AFB7DF00EF0FFB /* ZKGameController.m in Sources */,
 				3E4A0DAE18AF8D6100FA58DC /* ZKViewController.m in Sources */,
 				3E4A0DA418AF8D6100FA58DC /* main.m in Sources */,
+				FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */,
 				3E4A0DA818AF8D6100FA58DC /* ZKAppDelegate.m in Sources */,
 				3E474DE018AFAE8E00D12DFF /* ZKSprite.m in Sources */,
 				3E4A0DB118AF8D6100FA58DC /* ZKMyScene.m in Sources */,
