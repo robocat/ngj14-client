@@ -15,21 +15,18 @@ typedef enum {
 } ZKReaction;
 
 typedef enum {
-	ZKWalkingLeft,
 	ZKWalkingRight,
 	ZKWalkingUp,
+	ZKWalkingLeft,
 	ZKWalkingDown,
 } ZKWalkingDirection;
 
 @interface ZKPerson : SKSpriteNode
 
 @property (assign) ZKReaction reaction;
-@property (assign) CGPoint position;
-@property (assign) ZKWalkingDirection direction;
 
-+ (ZKPerson *)person;
+- (id)initWithPosition:(CGPoint)position;
 
-- (void)startWalking;
-- (void)stopWalking;
+- (void)walkTo:(CGPoint)target;
 
 @end
