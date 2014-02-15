@@ -25,7 +25,7 @@
 @implementation ZKPerson
 
 - (id)initWithPosition:(CGPoint)position {
-	if ((self = [super init])) {
+	if ((self = [super initWithPosition:position])) {
 		NSArray *people = @[ @"ManImages", @"RedMan", @"girl" ];
 		
 		SKTextureAtlas *manAtlas = [SKTextureAtlas atlasNamed:people[rand() % people.count]];
@@ -66,8 +66,6 @@
 		self.downAction = [SKAction repeatActionForever:[SKAction animateWithTextures:walkDownFrames timePerFrame:time resize:NO restore:YES]];
 		
 		self.anchorPoint = CGPointMake(0.5, 0);
-		
-		[self setPosition:position];
 	}
 	
 	return self;
