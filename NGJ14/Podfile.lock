@@ -1,10 +1,13 @@
 PODS:
   - CocoaAsyncSocket (7.3.4)
+  - LayerSprites (1.2)
 
 DEPENDENCIES:
   - CocoaAsyncSocket (~> 7.3.4)
+  - LayerSprites (~> 1.2)
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: 534d09416f992fd51efb23f534742ce70b3a7999
+  LayerSprites: 1d71fd66640adde34164afda52cbf8ea97ea4ff2
 
 COCOAPODS: 0.29.0
