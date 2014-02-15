@@ -8,8 +8,6 @@
 
 #import "ZKPerson.h"
 
-#define MOVE_ACTION @"MOVE_ACTION"
-
 @interface ZKPerson ()
 
 @property (strong, nonatomic) SKAction *leftAction;
@@ -22,18 +20,15 @@
 @property (strong, nonatomic) SKTexture *upStanding;
 @property (strong, nonatomic) SKTexture *downStanding;
 
-@property (assign, nonatomic) ZKWalkingDirection direction;
-
-@property (assign, nonatomic, getter = isWalking) BOOL walking;
-@property (strong, nonatomic) NSValue *nextTarget;
-
 @end
 
 @implementation ZKPerson
 
 - (id)initWithPosition:(CGPoint)position {
 	if ((self = [super init])) {
-		SKTextureAtlas *manAtlas = [SKTextureAtlas atlasNamed:rand() % 2 == 0? @"ManImages": @"RedMan"];
+		NSArray *people = @[ @"ManImages", @"RedMan", @"girl" ];
+		
+		SKTextureAtlas *manAtlas = [SKTextureAtlas atlasNamed:people[rand() % people.count]];
 		
 		SKTexture *left1 = [manAtlas textureNamed:@"left_1"];
 		SKTexture *left2 = [manAtlas textureNamed:@"left_2"];
@@ -92,51 +87,6 @@
 		case ZKWalkingUp: return self.upStanding; break;
 		case ZKWalkingDown: return self.downStanding; break;
 	}
-}
-
-- (void)startWalking {
-	if ([self actionForKey:MOVE_ACTION]) {
-		return;
-	}
-	
-	[self runAction:[self actionForDirection:self.direction] withKey:MOVE_ACTION];
-}
-
-- (void)stopWalking {
-	[self removeActionForKey:MOVE_ACTION];
-}
-
-- (void)walkTo:(CGPoint)target {
-	if (self.walking) {
-		self.nextTarget = [NSValue valueWithCGPoint:target];
-		return;
-	}
-	
-	self.walking = YES;
-	
-	CGFloat angle = atan2f(target.y - self.position.y, target.x - self.position.x);
-	angle = angle * (4.0 / (2 * M_PI));
-	if (angle < 0) angle += 4;
-	angle = round(angle);
-	if (angle >= 4) angle -= 4;
-	self.direction = angle;
-	
-	CGFloat dist = sqrt(pow(target.y - self.position.y, 2) + pow(target.x - self.position.x, 2));
-	
-	[self runAction:[SKAction moveTo:target duration:dist / 50] completion:^{
-		[self stopWalking];
-		self.texture = self.upStanding;
-		
-		self.walking = NO;
-		if (self.nextTarget) {
-			[self walkTo:[self.nextTarget CGPointValue]];
-			self.nextTarget = nil;
-		} else if (self.removeOnStop) {
-			[self removeFromParent];
-		}
-	}];
-	
-	[self startWalking];
 }
 
 - (void)showGoodBubble {

@@ -31,6 +31,9 @@
 		FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E40618AFBE83005F2BB3 /* ZKConnection.m */; };
 		FF12E40B18B002B7005F2BB3 /* BadBubbles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40918B002B7005F2BB3 /* BadBubbles.atlas */; };
 		FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */; };
+		FF12E40E18B013AB005F2BB3 /* girl.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40D18B013AB005F2BB3 /* girl.atlas */; };
+		FF12E41118B01A89005F2BB3 /* ZKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E41018B01A89005F2BB3 /* ZKEntity.m */; };
+		FF12E41418B02196005F2BB3 /* ZKAnimal.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E41318B02196005F2BB3 /* ZKAnimal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,11 @@
 		FF12E40618AFBE83005F2BB3 /* ZKConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKConnection.m; sourceTree = "<group>"; };
 		FF12E40918B002B7005F2BB3 /* BadBubbles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BadBubbles.atlas; sourceTree = "<group>"; };
 		FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GoodBubbles.atlas; sourceTree = "<group>"; };
+		FF12E40D18B013AB005F2BB3 /* girl.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = girl.atlas; sourceTree = "<group>"; };
+		FF12E40F18B01A89005F2BB3 /* ZKEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKEntity.h; sourceTree = "<group>"; };
+		FF12E41018B01A89005F2BB3 /* ZKEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKEntity.m; sourceTree = "<group>"; };
+		FF12E41218B02196005F2BB3 /* ZKAnimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKAnimal.h; sourceTree = "<group>"; };
+		FF12E41318B02196005F2BB3 /* ZKAnimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKAnimal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +161,10 @@
 				FF12E40618AFBE83005F2BB3 /* ZKConnection.m */,
 				3E4F7B3A18AFCB8A00A303D3 /* ZKPerson.h */,
 				3E4F7B3B18AFCB8A00A303D3 /* ZKPerson.m */,
+				FF12E40F18B01A89005F2BB3 /* ZKEntity.h */,
+				FF12E41018B01A89005F2BB3 /* ZKEntity.m */,
+				FF12E41218B02196005F2BB3 /* ZKAnimal.h */,
+				FF12E41318B02196005F2BB3 /* ZKAnimal.m */,
 			);
 			path = NGJ14;
 			sourceTree = "<group>";
@@ -194,6 +206,7 @@
 				FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */,
 				3E4A0DA918AF8D6100FA58DC /* Main.storyboard */,
 				3E4A0DB418AF8D6100FA58DC /* Images.xcassets */,
+				FF12E40D18B013AB005F2BB3 /* girl.atlas */,
 				3E4F7B4518AFE75E00A303D3 /* RedMan.atlas */,
 				3E4F7B4618AFE75E00A303D3 /* Zebra.atlas */,
 				3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */,
@@ -286,6 +299,7 @@
 				3E4F7B3E18AFD11300A303D3 /* ManImages.atlas in Resources */,
 				FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */,
 				3E4A0DA218AF8D6100FA58DC /* InfoPlist.strings in Resources */,
+				FF12E40E18B013AB005F2BB3 /* girl.atlas in Resources */,
 				3E4A0DB518AF8D6100FA58DC /* Images.xcassets in Resources */,
 				3E4A0DAB18AF8D6100FA58DC /* Main.storyboard in Resources */,
 			);
@@ -339,9 +353,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF12E41118B01A89005F2BB3 /* ZKEntity.m in Sources */,
 				3E4F7B3C18AFCB8A00A303D3 /* ZKPerson.m in Sources */,
 				3E4A0DAE18AF8D6100FA58DC /* ZKViewController.m in Sources */,
 				3E4A0DA418AF8D6100FA58DC /* main.m in Sources */,
+				FF12E41418B02196005F2BB3 /* ZKAnimal.m in Sources */,
 				FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */,
 				3E4A0DA818AF8D6100FA58DC /* ZKAppDelegate.m in Sources */,
 				3E4A0DB118AF8D6100FA58DC /* ZKMyScene.m in Sources */,

@@ -8,10 +8,12 @@
 
 #import "ZKMyScene.h"
 #import "ZKPerson.h"
+#import "ZKAnimal.h"
 
 @interface ZKMyScene ()
 
 @property (strong, nonatomic) NSMutableArray *people;
+@property (strong, nonatomic) NSMutableArray *animals;
 
 @end
 
@@ -21,12 +23,25 @@
     if (self = [super initWithSize:size]) {
 		srand(time(NULL));
 		
+		SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"savanna_ground"];
+		ground.anchorPoint = CGPointMake(0, 0);
+		ground.position = CGPointMake(0, self.frame.size.height - 320);
+		[self addChild:ground];
+		
 		SKSpriteNode *fgImage = [SKSpriteNode spriteNodeWithImageNamed:@"fg"];
 		fgImage.anchorPoint = CGPointMake(0, 0);
 		fgImage.position = CGPointMake(0, self.frame.size.height - 320);
 		[self addChild:fgImage];
 		
+		fgImage.zPosition = -320 + self.frame.size.height;
+		
+		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
+		
+		[self.animals addObject:[[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]]];
+		[self.animals addObject:[[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]]];
+		[self addChild:self.animals[0]];
+		[self addChild:self.animals[1]];
 		
 		self.happiness = 0.5;
     }
@@ -57,6 +72,12 @@
 	}
 }
 
+- (void)moveAnimal:(ZKAnimal *)animal {
+	if (![animal isWalking]) {
+		[animal walkTo:[self randomAnimalPoint]];
+	}
+}
+
 - (void)update:(CFTimeInterval)currentTime {
 	for (ZKPerson *person in self.people) {
 		person.zPosition = -person.position.y + self.frame.size.height;
@@ -69,10 +90,22 @@
 			[person showBadBubble];
 		}
 	}
+	
+	for (ZKAnimal *animal in self.animals) {
+		animal.zPosition = -animal.position.y + self.frame.size.height;
+		
+		if (rand() % 100 == 0) {
+			[self moveAnimal:animal];
+		}
+	}
 }
 
 - (CGPoint)randomVisitorPoint {
 	return CGPointMake(rand() % 320, self.frame.size.height - 320 + rand() % (13 * 4));
+}
+
+- (CGPoint)randomAnimalPoint {
+	return CGPointMake(rand() % (320 - 100) + 50, self.frame.size.height - (rand() % (320 - 120) + 50));
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
