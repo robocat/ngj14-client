@@ -23,10 +23,14 @@ typedef enum {
 
 @interface ZKPerson : SKSpriteNode
 
-@property (assign) ZKReaction reaction;
+@property (readonly, nonatomic, getter = isWalking) BOOL walking;
+@property (assign, nonatomic) BOOL removeOnStop;
 
 - (id)initWithPosition:(CGPoint)position;
 
 - (void)walkTo:(CGPoint)target;
+
+- (void)showGoodBubble;
+- (void)showBadBubble;
 
 @end
