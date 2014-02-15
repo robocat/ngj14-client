@@ -36,7 +36,7 @@
     self = [ZKSprite spriteNodeWithTexture:animatingFrames[0]];
 	
     _frames = [NSArray arrayWithArray:animatingFrames];
-		
+	
     return self;
 }
 

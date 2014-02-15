@@ -74,6 +74,8 @@
 					}
 				}
 				
+				NSLog(@"str: <%@>", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+				
 				NSError *error;
 				id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 				
@@ -91,6 +93,7 @@
 			for (NSDictionary *obj in self.datas) {
 				if (self.outputStream.hasSpaceAvailable) {
 					[self sendNow:obj];
+					[self.datas removeObject:obj];
 				}
 			}
 			

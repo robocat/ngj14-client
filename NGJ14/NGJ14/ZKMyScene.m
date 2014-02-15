@@ -9,13 +9,14 @@
 #import "ZKMyScene.h"
 
 #import "ZKSprite.h"
+#import "ZKPerson.h"
 #import "ZKGameController.h"
 
 
 @interface ZKMyScene ()
 
 @property (strong) ZKGameController *gameController;
-@property (strong) ZKSprite *guy;
+@property (strong) ZKPerson *man1;
 
 @end
 
@@ -43,13 +44,12 @@
 		
 		
 		// guy
-		_guy = [[ZKSprite alloc] initWithSpriteSheetNamed:@"person"
-														sourceRect:CGRectMake(0, 0, 28, 76)
-												andNumberOfSprites:12];
-		_guy.position = CGPointMake(CGRectGetMidX(self.frame),
-								   CGRectGetMidY(self.frame));
-		[self addChild:_guy];
-		[self walkingGuy];
+		_man1 = [[ZKPerson alloc] initPerson];
+		_man1.position = CGPointMake(CGRectGetMidX(self.frame),
+									 CGRectGetMidY(self.frame));
+        [self addChild:_man1];
+//		[self walkingGuy];
+		
 		
         
 //        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -75,10 +75,10 @@
     //By using a withKey if this gets called while already running it will remove the first action before
     //starting this again.
     
-    [_guy runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:_guy.frames
+    [_man1 runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:_man1.walkLeftFrames
                                                                     timePerFrame:0.5f
                                                                           resize:NO
-                                                                         restore:YES]] withKey:@"walkingInPlaceBear"];
+                                                                         restore:YES]] withKey:@"walkLeft"];
     return;
 }
 
