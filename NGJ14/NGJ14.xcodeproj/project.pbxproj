@@ -29,6 +29,8 @@
 		3E4F7B4718AFE75E00A303D3 /* RedMan.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4518AFE75E00A303D3 /* RedMan.atlas */; };
 		3E4F7B4818AFE75E00A303D3 /* Zebra.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4618AFE75E00A303D3 /* Zebra.atlas */; };
 		FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E40618AFBE83005F2BB3 /* ZKConnection.m */; };
+		FF12E40B18B002B7005F2BB3 /* BadBubbles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40918B002B7005F2BB3 /* BadBubbles.atlas */; };
+		FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		CE459B0B860743728BEDC7F5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FF12E40518AFBE83005F2BB3 /* ZKConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKConnection.h; sourceTree = "<group>"; };
 		FF12E40618AFBE83005F2BB3 /* ZKConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKConnection.m; sourceTree = "<group>"; };
+		FF12E40918B002B7005F2BB3 /* BadBubbles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BadBubbles.atlas; sourceTree = "<group>"; };
+		FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GoodBubbles.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 		FF12E40818AFE138005F2BB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF12E40918B002B7005F2BB3 /* BadBubbles.atlas */,
+				FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */,
 				3E4A0DA918AF8D6100FA58DC /* Main.storyboard */,
 				3E4A0DB418AF8D6100FA58DC /* Images.xcassets */,
 				3E4F7B4518AFE75E00A303D3 /* RedMan.atlas */,
@@ -276,7 +282,9 @@
 			files = (
 				3E4F7B4818AFE75E00A303D3 /* Zebra.atlas in Resources */,
 				3E4F7B4718AFE75E00A303D3 /* RedMan.atlas in Resources */,
+				FF12E40B18B002B7005F2BB3 /* BadBubbles.atlas in Resources */,
 				3E4F7B3E18AFD11300A303D3 /* ManImages.atlas in Resources */,
+				FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */,
 				3E4A0DA218AF8D6100FA58DC /* InfoPlist.strings in Resources */,
 				3E4A0DB518AF8D6100FA58DC /* Images.xcassets in Resources */,
 				3E4A0DAB18AF8D6100FA58DC /* Main.storyboard in Resources */,

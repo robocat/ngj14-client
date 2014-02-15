@@ -131,10 +131,37 @@
 		if (self.nextTarget) {
 			[self walkTo:[self.nextTarget CGPointValue]];
 			self.nextTarget = nil;
+		} else if (self.removeOnStop) {
+			[self removeFromParent];
 		}
 	}];
 	
 	[self startWalking];
+}
+
+- (void)showGoodBubble {
+	int number = rand() % 4 + 1;
+	SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"GoodBubbles"];
+	[self showbubble:number fromSet:atlas];
+}
+
+- (void)showBadBubble {
+	int number = rand() % 4 + 1;
+	SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BadBubbles"];
+	[self showbubble:number fromSet:atlas];
+}
+
+- (void)showbubble:(NSInteger)bid fromSet:(SKTextureAtlas *)atlas {
+	SKTexture *texture = [atlas textureNamed:[NSString stringWithFormat:@"%i", bid]];
+	SKSpriteNode *node = [SKSpriteNode spriteNodeWithTexture:texture];
+	node.anchorPoint = CGPointMake(.35, 0);
+	node.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height + 5);
+	node.size = CGSizeMake(texture.size.width / 2, texture.size.height / 2);
+	[self addChild:node];
+	
+	[self runAction:[SKAction waitForDuration:2] completion:^{
+		[node removeFromParent];
+	}];
 }
 
 @end
