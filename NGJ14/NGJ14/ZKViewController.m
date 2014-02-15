@@ -8,6 +8,7 @@
 
 #import "ZKViewController.h"
 #import "ZKMyScene.h"
+#import "ZKMenuScene.h"
 
 
 typedef enum {
@@ -44,6 +45,10 @@ typedef enum {
 @property (assign) ZKMessageType messageType;
 @property (assign) NSInteger participants;
 
+
+@property (strong) SKScene *menuScene;
+@property (strong) SKScene *gameScene;
+
 @end
 
 
@@ -52,20 +57,12 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    
-    SKScene *scene = [ZKMyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    [skView presentScene:scene];
-	
+//	[self startMenu];
 	[self startGame];
+//	[self connectServer];
 }
 
-
-- (void)startGame
+- (void)connectServer
 {
 	NSString *ip = @"172.30.214.64";
 	NSInteger port = 3456;
@@ -74,7 +71,31 @@ typedef enum {
 	_connection.delegate = self;
 	
 	[self startNewGame];
+}
+
+- (void)startMenu
+{
+	SKView *skView = (SKView *)self.view;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
 	
+    SKScene *scene = [ZKMenuScene sceneWithSize:skView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    [skView presentScene:scene];
+}
+
+
+- (void)startGame
+{
+	SKView *skView = (SKView *)self.view;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
+    
+    SKScene *scene = [ZKMyScene sceneWithSize:skView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+	
+	SKTransition *doors = [SKTransition doorsOpenVerticalWithDuration:0.5];
+    [skView presentScene:scene transition:doors];
 }
 
 
@@ -102,11 +123,12 @@ typedef enum {
 		case ZKMessageTypeResult:
 		{
 			_participants = [[data objectForKey:@"participants"] integerValue];
+			[self startGame];
 			break;
 		}
 		case ZKMessageTypeGameStart:
 		{
-			
+//			[self startGame];
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
