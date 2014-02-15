@@ -28,6 +28,9 @@
 		3E4F7B3E18AFD11300A303D3 /* ManImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */; };
 		3E4F7B4718AFE75E00A303D3 /* RedMan.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4518AFE75E00A303D3 /* RedMan.atlas */; };
 		3E4F7B4818AFE75E00A303D3 /* Zebra.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4618AFE75E00A303D3 /* Zebra.atlas */; };
+		3E4F7B4B18B00A1C00A303D3 /* ZKMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4A18B00A1C00A303D3 /* ZKMenuScene.m */; };
+		3E4F7B4E18B00D7700A303D3 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4C18B00D7700A303D3 /* Spark.sks */; };
+		3E4F7B4F18B00D7700A303D3 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F7B4D18B00D7700A303D3 /* spark.png */; };
 		FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E40618AFBE83005F2BB3 /* ZKConnection.m */; };
 		FF12E40B18B002B7005F2BB3 /* BadBubbles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40918B002B7005F2BB3 /* BadBubbles.atlas */; };
 		FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E40A18B002B7005F2BB3 /* GoodBubbles.atlas */; };
@@ -74,6 +77,10 @@
 		3E4F7B3D18AFD11300A303D3 /* ManImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = ManImages.atlas; path = NGJ14/ManImages.atlas; sourceTree = "<group>"; };
 		3E4F7B4518AFE75E00A303D3 /* RedMan.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = RedMan.atlas; path = NGJ14/RedMan.atlas; sourceTree = "<group>"; };
 		3E4F7B4618AFE75E00A303D3 /* Zebra.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Zebra.atlas; path = NGJ14/Zebra.atlas; sourceTree = "<group>"; };
+		3E4F7B4918B00A1C00A303D3 /* ZKMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKMenuScene.h; sourceTree = "<group>"; };
+		3E4F7B4A18B00A1C00A303D3 /* ZKMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKMenuScene.m; sourceTree = "<group>"; };
+		3E4F7B4C18B00D7700A303D3 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
+		3E4F7B4D18B00D7700A303D3 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		A1C26DAF245A4D84890C3170 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE459B0B860743728BEDC7F5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FF12E40518AFBE83005F2BB3 /* ZKConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKConnection.h; sourceTree = "<group>"; };
@@ -165,6 +172,10 @@
 				FF12E41018B01A89005F2BB3 /* ZKEntity.m */,
 				FF12E41218B02196005F2BB3 /* ZKAnimal.h */,
 				FF12E41318B02196005F2BB3 /* ZKAnimal.m */,
+				3E4F7B4918B00A1C00A303D3 /* ZKMenuScene.h */,
+				3E4F7B4A18B00A1C00A303D3 /* ZKMenuScene.m */,
+				3E4F7B4C18B00D7700A303D3 /* Spark.sks */,
+				3E4F7B4D18B00D7700A303D3 /* spark.png */,
 			);
 			path = NGJ14;
 			sourceTree = "<group>";
@@ -298,10 +309,12 @@
 				FF12E40B18B002B7005F2BB3 /* BadBubbles.atlas in Resources */,
 				3E4F7B3E18AFD11300A303D3 /* ManImages.atlas in Resources */,
 				FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */,
+				3E4F7B4F18B00D7700A303D3 /* spark.png in Resources */,
 				3E4A0DA218AF8D6100FA58DC /* InfoPlist.strings in Resources */,
 				FF12E40E18B013AB005F2BB3 /* girl.atlas in Resources */,
 				3E4A0DB518AF8D6100FA58DC /* Images.xcassets in Resources */,
 				3E4A0DAB18AF8D6100FA58DC /* Main.storyboard in Resources */,
+				3E4F7B4E18B00D7700A303D3 /* Spark.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +374,7 @@
 				FF12E40718AFBE83005F2BB3 /* ZKConnection.m in Sources */,
 				3E4A0DA818AF8D6100FA58DC /* ZKAppDelegate.m in Sources */,
 				3E4A0DB118AF8D6100FA58DC /* ZKMyScene.m in Sources */,
+				3E4F7B4B18B00A1C00A303D3 /* ZKMenuScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

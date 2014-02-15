@@ -8,6 +8,7 @@
 
 #import "ZKViewController.h"
 #import "ZKMyScene.h"
+#import "ZKMenuScene.h"
 
 
 typedef enum {
@@ -19,16 +20,16 @@ typedef enum {
 
 typedef enum {
 	ZKMessageTypeConnect = 1,
-	ZKMessageTypeResult,
-	ZKMessageTypeGameStart,
-	ZKMessageTypeAnimalKillRequest,
-	ZKMessageTypeAnimalKillReply,
-	ZKMessageTypeMakeEventRequest,
-	ZKMessageTypeMakeEventReply,
-	ZKMessageTypeAnimalDead,
-	ZKMessageTypeAnimalSick,
-	ZKMessageTypeSpectator,
-	ZKMessageTypePRPoints,
+	ZKMessageTypeResult,            // 2
+	ZKMessageTypeGameStart,         // 3
+	ZKMessageTypeAnimalKillRequest, // 4
+	ZKMessageTypeAnimalKillReply,   // 5
+	ZKMessageTypeMakeEventRequest,  // 6
+	ZKMessageTypeMakeEventReply,    // 7
+	ZKMessageTypeAnimalDead,        // 8
+	ZKMessageTypeAnimalSick,        // 9
+	ZKMessageTypeSpectator,         // 10
+	ZKMessageTypePRPoints,          // 11
 } ZKMessageType;
 
 
@@ -44,6 +45,10 @@ typedef enum {
 @property (assign) ZKMessageType messageType;
 @property (assign) NSInteger participants;
 
+
+@property (strong) ZKMenuScene *menuScene;
+@property (strong) ZKMyScene *gameScene;
+
 @end
 
 
@@ -52,20 +57,12 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    SKView *skView = (SKView *)self.view;
-    skView.showsFPS = NO;
-    skView.showsNodeCount = NO;
-    
-    SKScene *scene = [ZKMyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    [skView presentScene:scene];
-	
-	[self startGame];
+	[self startMenu];
+//	[self startGame];
+	[self connectServer];
 }
 
-
-- (void)startGame
+- (void)connectServer
 {
 	NSString *ip = @"172.30.214.64";
 	NSInteger port = 3456;
@@ -74,7 +71,33 @@ typedef enum {
 	_connection.delegate = self;
 	
 	[self startNewGame];
+}
+
+- (void)startMenu
+{
+	SKView *skView = (SKView *)self.view;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
 	
+    _menuScene = [ZKMenuScene sceneWithSize:skView.bounds.size];
+    _menuScene.scaleMode = SKSceneScaleModeAspectFill;
+    [skView presentScene:_menuScene];
+	
+	
+}
+
+
+- (void)startGame
+{
+	SKView *skView = (SKView *)self.view;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
+    
+    _gameScene = [ZKMyScene sceneWithSize:skView.bounds.size];
+    _gameScene.scaleMode = SKSceneScaleModeAspectFill;
+	
+	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
+    [skView presentScene:_gameScene transition:doors];
 }
 
 
@@ -102,11 +125,17 @@ typedef enum {
 		case ZKMessageTypeResult:
 		{
 			_participants = [[data objectForKey:@"participants"] integerValue];
+			_menuScene.peopleCount = _participants++;
+			_menuScene.peopleCount = _participants++;
+			_menuScene.peopleCount = _participants;
 			break;
 		}
 		case ZKMessageTypeGameStart:
 		{
+			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
+			_animalType = [[data objectForKey:@"animaltype"] integerValue];
 			
+			[self performSelector:@selector(startGame) withObject:nil afterDelay:5];
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
@@ -136,17 +165,18 @@ typedef enum {
 		}
 		case ZKMessageTypeAnimalSick:
 		{
-			
+//			animatId = [[data objectForKey:@"id"] integerValue];
 			break;
 		}
 		case ZKMessageTypeSpectator:
 		{
-			
+			NSInteger spectatorTotal = [[data objectForKey:@"totalcount"] integerValue];
+			_gameScene.peopleCount = spectatorTotal;
 			break;
 		}
 		case ZKMessageTypePRPoints:
 		{
-			
+//			prPoints = [[data objectForKey:@"totalcount"] integerValue];
 			break;
 		}
 		default:
