@@ -66,6 +66,8 @@
 		self.downAction = [SKAction repeatActionForever:[SKAction animateWithTextures:walkDownFrames timePerFrame:time resize:NO restore:YES]];
 		
 		self.anchorPoint = CGPointMake(0.5, 0);
+		
+		[self setPosition:position];
 	}
 	
 	return self;
