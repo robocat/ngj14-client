@@ -74,7 +74,7 @@
 					}
 				}
 				
-				NSLog(@"str: <%@>", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//				NSLog(@"str: <%@>", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 				
 				NSError *error;
 				id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
