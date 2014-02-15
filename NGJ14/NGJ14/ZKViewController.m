@@ -46,8 +46,8 @@ typedef enum {
 @property (assign) NSInteger participants;
 
 
-@property (strong) SKScene *menuScene;
-@property (strong) SKScene *gameScene;
+@property (strong) ZKMenuScene *menuScene;
+@property (strong) ZKMyScene *gameScene;
 
 @end
 
@@ -79,9 +79,11 @@ typedef enum {
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
 	
-    SKScene *scene = [ZKMenuScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    [skView presentScene:scene];
+    _menuScene = [ZKMenuScene sceneWithSize:skView.bounds.size];
+    _menuScene.scaleMode = SKSceneScaleModeAspectFill;
+    [skView presentScene:_menuScene];
+	
+	
 }
 
 
@@ -91,11 +93,11 @@ typedef enum {
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
-    SKScene *scene = [ZKMyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    _gameScene = [ZKMyScene sceneWithSize:skView.bounds.size];
+    _gameScene.scaleMode = SKSceneScaleModeAspectFill;
 	
 	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
-    [skView presentScene:scene transition:doors];
+    [skView presentScene:_gameScene transition:doors];
 }
 
 
@@ -123,13 +125,17 @@ typedef enum {
 		case ZKMessageTypeResult:
 		{
 			_participants = [[data objectForKey:@"participants"] integerValue];
+			_menuScene.peopleCount = _participants++;
+			_menuScene.peopleCount = _participants++;
+			_menuScene.peopleCount = _participants;
 			break;
 		}
 		case ZKMessageTypeGameStart:
 		{
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
 			_animalType = [[data objectForKey:@"animaltype"] integerValue];
-			[self startGame];
+			
+			[self performSelector:@selector(startGame) withObject:nil afterDelay:5];
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
@@ -164,12 +170,13 @@ typedef enum {
 		}
 		case ZKMessageTypeSpectator:
 		{
-//			spectatorTotal = [[data objectForKey:@"totalCount"] integerValue];
+			NSInteger spectatorTotal = [[data objectForKey:@"totalcount"] integerValue];
+			_gameScene.peopleCount = spectatorTotal;
 			break;
 		}
 		case ZKMessageTypePRPoints:
 		{
-//			prPoints = [[data objectForKey:@"totalCount"] integerValue];
+//			prPoints = [[data objectForKey:@"totalcount"] integerValue];
 			break;
 		}
 		default:

@@ -10,4 +10,8 @@
 
 @interface ZKMenuScene : SKScene
 
+
+@property (assign, nonatomic) NSUInteger peopleCount;
+
+
 @end
