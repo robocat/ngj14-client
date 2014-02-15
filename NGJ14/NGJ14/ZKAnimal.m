@@ -47,4 +47,13 @@
 	return nil;
 }
 
+
+- (SKAction *)doEvent
+{
+	NSArray *eventFrames = @[ _texture1, _texture3 ];
+	
+	CGFloat time = 0.2;
+	
+	return [SKAction repeatActionForever:[SKAction animateWithTextures:eventFrames timePerFrame:time resize:NO restore:YES]];
+}
 @end

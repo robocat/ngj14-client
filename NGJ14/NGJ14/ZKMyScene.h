@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "ZKViewController.h"
 
 @interface ZKMyScene : SKScene
 
@@ -19,5 +20,11 @@
  * How many people are visiting the cage. Changing will make them walk in/out.
  */
 @property (assign, nonatomic) NSUInteger peopleCount;
+
+
+
+@property (weak) ZKViewController *viewController;
+
+- (void)doEvent;
 
 @end

@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSMutableArray *people;
 @property (strong, nonatomic) NSMutableArray *animals;
 
+@property (assign) BOOL isShowingEvent;
+
 @end
 
 @implementation ZKMyScene
@@ -44,6 +46,10 @@
 		[self addChild:self.animals[1]];
 		
 		self.happiness = 0.5;
+		
+		
+		// Show button
+		[self addChild:[self showButtonNode]];
     }
 	
     return self;
@@ -110,6 +116,33 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	self.peopleCount = rand() % 10;
+	
+	UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+	
+    // show button touched
+    if ([node.name isEqualToString:@"showButton"]) {
+		_isShowingEvent = !_isShowingEvent;
+		[_viewController makeEvent:_isShowingEvent];
+    }
+}
+
+
+- (SKSpriteNode *)showButtonNode
+{
+    SKSpriteNode *showNode = [SKSpriteNode spriteNodeWithImageNamed:@"show"];
+    showNode.position = CGPointMake(CGRectGetMidX(self.frame),
+									CGRectGetMidY(self.frame)-100);
+    showNode.name = @"showButton";
+    showNode.zPosition = 1.0;
+    return showNode;
+}
+
+
+- (void)doEvent
+{
+	
 }
 
 @end

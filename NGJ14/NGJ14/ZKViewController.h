@@ -11,4 +11,6 @@
 
 @interface ZKViewController : UIViewController
 
+- (void)makeEvent:(BOOL)start;
+
 @end

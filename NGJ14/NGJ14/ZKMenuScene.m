@@ -65,7 +65,7 @@
 
 - (void)setPeopleCount:(NSUInteger)peopleCount {
 	while (peopleCount > self.people.count) {
-		ZKPerson *person = [[ZKPerson alloc] initWithPosition:CGPointMake(120, 50)];
+		ZKPerson *person = [[ZKPerson alloc] initWithPosition:CGPointMake(160, -50)];
 		[self addChild:person];
 		[self.people addObject:person];
 		[self movePerson:person];
@@ -86,13 +86,13 @@
 			case 0:
 				break;
 			case 1:
-				[person walkTo:CGPointMake(120, 50)];
+				[person walkTo:CGPointMake(120, 100)];
 				break;
 			case 2:
-				[person walkTo:CGPointMake(150, 50)];
+				[person walkTo:CGPointMake(150, 100)];
 				break;
 			case 3:
-				[person walkTo:CGPointMake(180, 50)];
+				[person walkTo:CGPointMake(180, 100)];
 				break;
 			default:
 				break;

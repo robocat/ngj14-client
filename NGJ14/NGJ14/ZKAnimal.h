@@ -12,4 +12,6 @@
 
 - (id)initWithPosition:(CGPoint)position atlas:(SKTextureAtlas *)atlas;
 
+- (SKAction *)doEvent;
+
 @end

@@ -95,17 +95,24 @@ typedef enum {
     
     _gameScene = [ZKMyScene sceneWithSize:skView.bounds.size];
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
+	_gameScene.viewController = self;
 	
 	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
     [skView presentScene:_gameScene transition:doors];
 }
 
 
+// Requests
+
 - (void)startNewGame
 {
 	[_connection sendData:@{ @"msgtype": [NSString stringWithFormat:@"%d", ZKMessageTypeConnect], @"gamename": @"ZooKiller" }];
 }
 
+- (void)makeEvent:(BOOL)start
+{
+	[_connection sendData:@{ @"msgtype": [NSString stringWithFormat:@"%d", ZKMessageTypeMakeEventRequest], @"start": @(start) }];
+}
 
 
 #pragma mark - Connection delegate
@@ -149,10 +156,7 @@ typedef enum {
 			break;
 		}
 		case ZKMessageTypeMakeEventRequest:
-		{
-			
 			break;
-		}
 		case ZKMessageTypeMakeEventReply:
 		{
 			
