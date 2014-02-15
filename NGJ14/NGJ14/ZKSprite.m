@@ -20,16 +20,17 @@
 	
     texture.filteringMode = SKTextureFilteringNearest;
 	
-    float sx = source.origin.x;
-    float sy = source.origin.y;
-    float sWidth = source.size.width;
-    float sHeight = source.size.height;
+    float x = source.origin.x;
+    float y = source.origin.y;
+    float w = source.size.width;
+    float h = source.size.height;
 	
     for (int i = 0; i < numberOfSprites; i++) {
-        CGRect cutter = CGRectMake(sx, sy/texture.size.width, sWidth/texture.size.width, sHeight/texture.size.height);
+        CGRect cutter = CGRectMake(x, y/texture.size.width, w/texture.size.width, h/texture.size.height);
         SKTexture *temp = [SKTexture textureWithRect:cutter inTexture:texture];
         [animatingFrames addObject:temp];
-        sx += sWidth/texture.size.width;
+        x += w/texture.size.width;
+//		y += h/texture.size.height;
     }
 	
     self = [ZKSprite spriteNodeWithTexture:animatingFrames[0]];

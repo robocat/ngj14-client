@@ -26,6 +26,7 @@
 		3E4A0DBE18AF8D6100FA58DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9918AF8D6100FA58DC /* UIKit.framework */; };
 		3E4A0DC618AF8D6100FA58DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A0DC418AF8D6100FA58DC /* InfoPlist.strings */; };
 		3E4A0DC818AF8D6100FA58DC /* NGJ14Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0DC718AF8D6100FA58DC /* NGJ14Tests.m */; };
+		3E90A84918AFB7DF00EF0FFB /* ZKGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		3E4A0DC318AF8D6100FA58DC /* NGJ14Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NGJ14Tests-Info.plist"; sourceTree = "<group>"; };
 		3E4A0DC518AF8D6100FA58DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E4A0DC718AF8D6100FA58DC /* NGJ14Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGJ14Tests.m; sourceTree = "<group>"; };
+		3E90A84718AFB7DF00EF0FFB /* ZKGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKGameController.h; sourceTree = "<group>"; };
+		3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKGameController.m; sourceTree = "<group>"; };
 		A1C26DAF245A4D84890C3170 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE459B0B860743728BEDC7F5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +145,8 @@
 				3E4A0DB218AF8D6100FA58DC /* Spaceship.png */,
 				3E474DDE18AFAE8E00D12DFF /* ZKSprite.h */,
 				3E474DDF18AFAE8E00D12DFF /* ZKSprite.m */,
+				3E90A84718AFB7DF00EF0FFB /* ZKGameController.h */,
+				3E90A84818AFB7DF00EF0FFB /* ZKGameController.m */,
 			);
 			path = NGJ14;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E90A84918AFB7DF00EF0FFB /* ZKGameController.m in Sources */,
 				3E4A0DAE18AF8D6100FA58DC /* ZKViewController.m in Sources */,
 				3E4A0DA418AF8D6100FA58DC /* main.m in Sources */,
 				3E4A0DA818AF8D6100FA58DC /* ZKAppDelegate.m in Sources */,

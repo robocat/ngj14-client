@@ -9,6 +9,16 @@
 #import "ZKMyScene.h"
 
 #import "ZKSprite.h"
+#import "ZKGameController.h"
+
+
+@interface ZKMyScene ()
+
+@property (strong) ZKGameController *gameController;
+@property (strong) ZKSprite *guy;
+
+@end
+
 
 
 @implementation ZKMyScene
@@ -33,24 +43,43 @@
 		
 		
 		// guy
-		ZKSprite *guy = [[ZKSprite alloc] initWithSpriteSheetNamed:@"person"
-														sourceRect:CGRectMake(0, 0, 28, 84)
+		_guy = [[ZKSprite alloc] initWithSpriteSheetNamed:@"person"
+														sourceRect:CGRectMake(0, 0, 28, 76)
 												andNumberOfSprites:12];
-		guy.position = CGPointMake(CGRectGetMidX(self.frame),
+		_guy.position = CGPointMake(CGRectGetMidX(self.frame),
 								   CGRectGetMidY(self.frame));
-		[self addChild:guy];
+		[self addChild:_guy];
+		[self walkingGuy];
 		
         
 //        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-//        
+//
 //        myLabel.text = @"Hello, World!";
 //        myLabel.fontSize = 30;
 //        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
 //                                       CGRectGetMidY(self.frame));
 //        
 //        [self addChild:myLabel];
+		
+		_gameController = [ZKGameController new];
+		[_gameController startGame];
     }
+	
     return self;
+}
+
+
+-(void)walkingGuy
+{
+    //This is our general runAction method to make our bear walk.
+    //By using a withKey if this gets called while already running it will remove the first action before
+    //starting this again.
+    
+    [_guy runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:_guy.frames
+                                                                    timePerFrame:0.5f
+                                                                          resize:NO
+                                                                         restore:YES]] withKey:@"walkingInPlaceBear"];
+    return;
 }
 
 //-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
