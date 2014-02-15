@@ -20,16 +20,16 @@ typedef enum {
 
 typedef enum {
 	ZKMessageTypeConnect = 1,
-	ZKMessageTypeResult,
-	ZKMessageTypeGameStart,
-	ZKMessageTypeAnimalKillRequest,
-	ZKMessageTypeAnimalKillReply,
-	ZKMessageTypeMakeEventRequest,
-	ZKMessageTypeMakeEventReply,
-	ZKMessageTypeAnimalDead,
-	ZKMessageTypeAnimalSick,
-	ZKMessageTypeSpectator,
-	ZKMessageTypePRPoints,
+	ZKMessageTypeResult,            // 2
+	ZKMessageTypeGameStart,         // 3
+	ZKMessageTypeAnimalKillRequest, // 4
+	ZKMessageTypeAnimalKillReply,   // 5
+	ZKMessageTypeMakeEventRequest,  // 6
+	ZKMessageTypeMakeEventReply,    // 7
+	ZKMessageTypeAnimalDead,        // 8
+	ZKMessageTypeAnimalSick,        // 9
+	ZKMessageTypeSpectator,         // 10
+	ZKMessageTypePRPoints,          // 11
 } ZKMessageType;
 
 
@@ -57,9 +57,9 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-//	[self startMenu];
-	[self startGame];
-//	[self connectServer];
+	[self startMenu];
+//	[self startGame];
+	[self connectServer];
 }
 
 - (void)connectServer
@@ -94,7 +94,7 @@ typedef enum {
     SKScene *scene = [ZKMyScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
 	
-	SKTransition *doors = [SKTransition doorsOpenVerticalWithDuration:0.5];
+	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
     [skView presentScene:scene transition:doors];
 }
 
@@ -123,12 +123,13 @@ typedef enum {
 		case ZKMessageTypeResult:
 		{
 			_participants = [[data objectForKey:@"participants"] integerValue];
-			[self startGame];
 			break;
 		}
 		case ZKMessageTypeGameStart:
 		{
-//			[self startGame];
+			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
+			_animalType = [[data objectForKey:@"animaltype"] integerValue];
+			[self startGame];
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
@@ -158,17 +159,17 @@ typedef enum {
 		}
 		case ZKMessageTypeAnimalSick:
 		{
-			
+//			animatId = [[data objectForKey:@"id"] integerValue];
 			break;
 		}
 		case ZKMessageTypeSpectator:
 		{
-			
+//			spectatorTotal = [[data objectForKey:@"totalCount"] integerValue];
 			break;
 		}
 		case ZKMessageTypePRPoints:
 		{
-			
+//			prPoints = [[data objectForKey:@"totalCount"] integerValue];
 			break;
 		}
 		default:
