@@ -23,7 +23,7 @@ typedef enum {
 
 @interface ZKPerson : SKSpriteNode
 
-@property (assign) ZKReaction reaction;
+@property (readonly, nonatomic, getter = isWalking) BOOL walking;
 
 - (id)initWithPosition:(CGPoint)position;
 

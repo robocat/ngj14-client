@@ -9,7 +9,6 @@
 #import "ZKPerson.h"
 
 #define MOVE_ACTION @"MOVE_ACTION"
-#define WALK_ACTION @"WALK_ACTION"
 
 @interface ZKPerson ()
 
@@ -34,7 +33,7 @@
 
 - (id)initWithPosition:(CGPoint)position {
 	if ((self = [super init])) {
-		SKTextureAtlas *manAtlas = [SKTextureAtlas atlasNamed:@"ManImages"];
+		SKTextureAtlas *manAtlas = [SKTextureAtlas atlasNamed:rand() % 2 == 0? @"ManImages": @"RedMan"];
 		
 		SKTexture *left1 = [manAtlas textureNamed:@"left_1"];
 		SKTexture *left2 = [manAtlas textureNamed:@"left_2"];
@@ -57,7 +56,7 @@
 		NSArray *walkUpFrames = @[ up1, up2, up1, up3 ];
 		NSArray *walkDownFrames = @[ down1, down2, down1, down3 ];
 		
-		self.texture = left1;
+		self.texture = up1;
 		self.size = left1.size;
 		
 		self.leftStanding = left1;
@@ -65,7 +64,7 @@
 		self.upStanding = up1;
 		self.downStanding = down1;
 		
-		CGFloat time = 0.1;
+		CGFloat time = 0.2;
 		self.leftAction = [SKAction repeatActionForever:[SKAction animateWithTextures:walkLeftFrames timePerFrame:time resize:NO restore:YES]];
 		self.rightAction = [SKAction repeatActionForever:[SKAction animateWithTextures:walkRightFrames timePerFrame:time resize:NO restore:YES]];
 		self.upAction = [SKAction repeatActionForever:[SKAction animateWithTextures:walkUpFrames timePerFrame:time resize:NO restore:YES]];
@@ -118,14 +117,15 @@
 	CGFloat angle = atan2f(target.y - self.position.y, target.x - self.position.x);
 	angle = angle * (4.0 / (2 * M_PI));
 	if (angle < 0) angle += 4;
+	angle = round(angle);
 	if (angle >= 4) angle -= 4;
-	self.direction = round(angle);
+	self.direction = angle;
 	
-	if ((int)self.direction == 4) self.direction = 0;
+	CGFloat dist = sqrt(pow(target.y - self.position.y, 2) + pow(target.x - self.position.x, 2));
 	
-	[self runAction:[SKAction moveTo:target duration:2] completion:^{
-		self.texture = [self standingTextureForDirection:self.direction];
+	[self runAction:[SKAction moveTo:target duration:dist / 50] completion:^{
 		[self stopWalking];
+		self.texture = self.upStanding;
 		
 		self.walking = NO;
 		if (self.nextTarget) {

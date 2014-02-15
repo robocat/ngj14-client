@@ -152,7 +152,10 @@ typedef enum {
 		default:
 			break;
 	}
-	
+}
+
+- (BOOL)prefersStatusBarHidden {
+	return YES;
 }
 
 @end
