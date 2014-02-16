@@ -44,12 +44,12 @@
 //	[self startGame];
 	
 
-//	NSError *error;
-//	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
-//	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
-//	_musicPlayer.numberOfLoops = -1;
-//	[_musicPlayer prepareToPlay];
-//	[_musicPlayer play];
+	NSError *error;
+	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
+	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+	_musicPlayer.numberOfLoops = -1;
+	[_musicPlayer prepareToPlay];
+	[_musicPlayer play];
 }
 
 - (void)connectServer
@@ -80,8 +80,8 @@
 - (void)startGame
 {
 	SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
     
     _gameScene = [ZKMyScene sceneWithSize:skView.bounds.size];
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
@@ -95,6 +95,18 @@
     [skView presentScene:_gameScene transition:doors];
 }
 
+- (void)endGame
+{
+	SKView *skView = (SKView *)self.view;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
+    
+    _menuScene = [ZKMenuScene sceneWithSize:skView.bounds.size];
+    _menuScene.scaleMode = SKSceneScaleModeAspectFill;
+	
+	SKTransition *doors = [SKTransition doorsCloseHorizontalWithDuration:1];
+	[skView presentScene:_menuScene transition:doors];
+}
 
 // Requests
 
@@ -192,12 +204,12 @@
 			break;
 		}
 		case ZKMessageTypeNewAnimal: {
-			ZKAnimalType aType = (ZKAnimalType)[[data objectForKey:@"animaltype"] integerValue];
 			NSArray *aIds = [[data objectForKey:@"animalid"] mutableCopy];
-			[_gameScene newAnimalType:aType count:0 animalIds:aIds];
+			[_gameScene newAnimalType:_animalType count:0 animalIds:aIds];
 			break;
 		}
 		default:
+			[self endGame];
 			break;
 	}
 }

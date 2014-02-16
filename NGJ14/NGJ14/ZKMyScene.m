@@ -189,9 +189,9 @@
 	    if ([node.name isEqualToString:@"showButton"]) {
 			self.isShowingEvent = !self.isShowingEvent;
 			
-			if (self.isShowingEvent) {
-				[self.viewController makeEvent:self.isShowingEvent];
-			} else {
+			[self.viewController makeEvent:self.isShowingEvent];
+			
+			if (!self.isShowingEvent) {
 				[self endEvent];
 			}
 		}
