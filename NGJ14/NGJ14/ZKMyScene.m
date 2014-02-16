@@ -90,7 +90,7 @@
 		ZKPerson *person = self.people.firstObject;
 		[self.people removeObjectAtIndex:0];
 		
-		[person walkTo:CGPointMake(person.position.x, 0)];
+		[person walkTo:CGPointMake(person.position.x, 100)];
 		person.removeOnStop = YES;
 	}
 }
@@ -189,11 +189,10 @@
 	
 	for (SKNode *node in nodes) {
 	    if ([node.name isEqualToString:@"showButton"]) {
-			self.isShowingEvent = !self.isShowingEvent;
-			
-			[self.viewController makeEvent:self.isShowingEvent];
-			
 			if (!self.isShowingEvent) {
+				[self.viewController makeEvent:YES];
+			} else if (self.animalsAreDancing) {
+				[self.viewController makeEvent:NO];
 				[self endEvent];
 			}
 		}
@@ -233,7 +232,7 @@
     SKSpriteNode *showNode = [SKSpriteNode spriteNodeWithImageNamed:@"show"];
     showNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-150);
     showNode.name = @"showButton";
-    showNode.zPosition = 1.0;
+    showNode.zPosition = 1000000.0;
     return showNode;
 }
 
