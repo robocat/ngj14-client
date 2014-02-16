@@ -10,7 +10,7 @@
 		13B0DA0ACB1348B3A0415497 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C26DAF245A4D84890C3170 /* libPods.a */; };
 		3E49151118B0DD9B00BCC638 /* Giraffe.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E49151018B0DD9B00BCC638 /* Giraffe.atlas */; };
 		3E49151318B0E16400BCC638 /* Lion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E49151218B0E16400BCC638 /* Lion.atlas */; };
-		3E49151518B0E20200BCC638 /* orange_girl.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E49151418B0E20200BCC638 /* orange_girl.atlas */; };
+		3E49151718B0E2AB00BCC638 /* orange_girl.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3E49151618B0E2AB00BCC638 /* orange_girl.atlas */; };
 		3E4A0D9618AF8D6100FA58DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9518AF8D6100FA58DC /* Foundation.framework */; };
 		3E4A0D9818AF8D6100FA58DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9718AF8D6100FA58DC /* CoreGraphics.framework */; };
 		3E4A0D9A18AF8D6100FA58DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A0D9918AF8D6100FA58DC /* UIKit.framework */; };
@@ -57,7 +57,7 @@
 /* Begin PBXFileReference section */
 		3E49151018B0DD9B00BCC638 /* Giraffe.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Giraffe.atlas; path = NGJ14/Giraffe.atlas; sourceTree = "<group>"; };
 		3E49151218B0E16400BCC638 /* Lion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Lion.atlas; path = NGJ14/Lion.atlas; sourceTree = "<group>"; };
-		3E49151418B0E20200BCC638 /* orange_girl.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = orange_girl.atlas; path = NGJ14/orange_girl.atlas; sourceTree = "<group>"; };
+		3E49151618B0E2AB00BCC638 /* orange_girl.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = orange_girl.atlas; path = NGJ14/orange_girl.atlas; sourceTree = "<group>"; };
 		3E4A0D9218AF8D6100FA58DC /* NGJ14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGJ14.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4A0D9518AF8D6100FA58DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E4A0D9718AF8D6100FA58DC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -223,7 +223,7 @@
 		FF12E40818AFE138005F2BB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3E49151418B0E20200BCC638 /* orange_girl.atlas */,
+				3E49151618B0E2AB00BCC638 /* orange_girl.atlas */,
 				3E49151218B0E16400BCC638 /* Lion.atlas */,
 				3E49151018B0DD9B00BCC638 /* Giraffe.atlas */,
 				FF12E41718B0D73D005F2BB3 /* girl_2.atlas */,
@@ -332,7 +332,7 @@
 				3E4A0DB518AF8D6100FA58DC /* Images.xcassets in Resources */,
 				3E49151318B0E16400BCC638 /* Lion.atlas in Resources */,
 				3E4A0DAB18AF8D6100FA58DC /* Main.storyboard in Resources */,
-				3E49151518B0E20200BCC638 /* orange_girl.atlas in Resources */,
+				3E49151718B0E2AB00BCC638 /* orange_girl.atlas in Resources */,
 				3E4F7B4E18B00D7700A303D3 /* Spark.sks in Resources */,
 				FF12E41818B0D73D005F2BB3 /* girl_2.atlas in Resources */,
 			);
