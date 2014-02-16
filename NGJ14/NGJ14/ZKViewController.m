@@ -150,7 +150,14 @@
 		case ZKMessageTypeMakeEventRequest:
 			break;
 		case ZKMessageTypeMakeEventReply: {
-			[_gameScene doEvent];
+			BOOL accepted = [[data objectForKey:@"accepted"] boolValue];
+			
+			if (accepted) {
+				[_gameScene doEvent];
+			} else {
+				_gameScene.isShowingEvent = NO;
+			}
+			
 			break;
 		}
 		case ZKMessageTypeAnimalDead: {
