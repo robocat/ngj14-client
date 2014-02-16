@@ -109,6 +109,10 @@
 	
 	[self runAction:[SKAction waitForDuration:10] completion:^{
 		[self removeFromParent];
+		
+		if (self.delegate && [self.delegate respondsToSelector:@selector(animalWasRemoved:)]) {
+			[self.delegate animalWasRemoved:self];
+		}
 	}];
 }
 

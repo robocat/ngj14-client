@@ -8,8 +8,17 @@
 
 #import "ZKEntity.h"
 
+@class ZKAnimal;
+
+@protocol ZKAnimalDelegate <NSObject>
+
+- (void)animalWasRemoved:(ZKAnimal *)animal;
+
+@end
+
 @interface ZKAnimal : ZKEntity
 
+@property (assign, nonatomic) id<ZKAnimalDelegate> delegate;
 @property (assign, nonatomic) BOOL sick;
 @property (assign, nonatomic) BOOL dead;
 

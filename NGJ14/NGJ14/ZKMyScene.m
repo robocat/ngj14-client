@@ -10,7 +10,7 @@
 #import "ZKPerson.h"
 #import "ZKAnimal.h"
 
-@interface ZKMyScene ()
+@interface ZKMyScene () <ZKAnimalDelegate>
 
 @property (strong, nonatomic) NSMutableArray *people;
 @property (strong, nonatomic) NSMutableArray *animals;
@@ -216,6 +216,12 @@
 		[animal stopEvent];
 		[animal walkTo:[self randomAnimalPoint]];
 	}
+}
+
+#pragma mark - ZKAnimalDelegate
+
+- (void)animalWasRemoved:(ZKAnimal *)animal {
+	[self.animals removeObject:animal];
 }
 
 @end
