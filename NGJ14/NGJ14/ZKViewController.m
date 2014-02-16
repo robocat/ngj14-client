@@ -70,7 +70,7 @@
     _menuScene.scaleMode = SKSceneScaleModeAspectFill;
     [skView presentScene:_menuScene];
 	
-	
+	_menuScene.peopleCount = 1;
 }
 
 
@@ -105,7 +105,7 @@
 
 - (void)makeKill:(NSInteger)animalId
 {
-	[_connection sendData:@{ @"msgtype": [NSString stringWithFormat:@"%d", ZKMessageTypeAnimalKillRequest], @"id": @(animalId) }];
+	[_connection sendData:@{ @"msgtype": [NSString stringWithFormat:@"%d", ZKMessageTypeAnimalKillRequest], @"animalid": @(animalId) }];
 }
 
 
@@ -125,7 +125,6 @@
 			break;
 		case ZKMessageTypeResult: {
 			_participants = [[data objectForKey:@"participants"] integerValue];
-			_menuScene.peopleCount = _participants++;
 			_menuScene.peopleCount = _participants++;
 			_menuScene.peopleCount = _participants;
 			break;
@@ -151,11 +150,11 @@
 			break;
 		}
 		case ZKMessageTypeAnimalDead: {
-			
+//			animatId = [[data objectForKey:@"animalid"] integerValue];
 			break;
 		}
 		case ZKMessageTypeAnimalSick: {
-//			animatId = [[data objectForKey:@"id"] integerValue];
+//			animatId = [[data objectForKey:@"animalid"] integerValue];
 			break;
 		}
 		case ZKMessageTypeSpectator: {
@@ -167,6 +166,20 @@
 //			prPoints = [[data objectForKey:@"totalcount"] integerValue];
 			break;
 		}
+		case ZKMessageTypeAnimalDiedInfo: {
+			//			prPoints = [[data objectForKey:@"totalcount"] integerValue];
+			break;
+		}
+		case ZKMessageTypeHappiness: {
+			CGFloat happiness = [[data objectForKey:@"happiness"] floatValue];
+			_gameScene.happiness = happiness;
+			break;
+		}
+//		case ZKMessageTypeHappiness: {
+//			CGFloat happiness = [[data objectForKey:@"happiness"] floatValue];
+//			_gameScene.happiness = happiness;
+//			break;
+//		}
 		default:
 			break;
 	}

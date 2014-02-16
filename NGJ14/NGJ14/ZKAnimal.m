@@ -30,6 +30,8 @@
 		self.size = self.texture.size;
 		
 		self.anchorPoint = CGPointMake(0.5, 0);
+		
+		self.health = 100;
 	}
 	
 	return self;

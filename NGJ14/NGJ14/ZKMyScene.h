@@ -21,6 +21,8 @@
  */
 @property (assign, nonatomic) NSUInteger peopleCount;
 
+@property (assign) NSInteger pr;
+
 //@property (assign) ZKAnimalType animalType;
 
 @property (weak) ZKViewController *viewController;

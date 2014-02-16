@@ -10,6 +10,9 @@
 
 @interface ZKAnimal : ZKEntity
 
+@property (assign) NSInteger health;
+
+
 - (id)initWithPosition:(CGPoint)position atlas:(SKTextureAtlas *)atlas;
 
 - (void)performEvent;
