@@ -93,8 +93,6 @@
 	}
 }
 
-
-
 - (void)newAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds {
 	NSString *animalName = nil;
 	switch (animalType) {
