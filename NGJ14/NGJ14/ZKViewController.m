@@ -24,6 +24,7 @@
 @property (strong) NSString *gameName;
 @property (assign) ZKMessageType messageType;
 @property (assign) NSInteger participants;
+@property (assign) NSInteger spectatorTotal;
 
 
 @property (strong) ZKMenuScene *menuScene;
@@ -42,12 +43,12 @@
 //	[self startGame];
 	
 
-	NSError *error;
-	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
-	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
-	_musicPlayer.numberOfLoops = -1;
-	[_musicPlayer prepareToPlay];
-	[_musicPlayer play];
+//	NSError *error;
+//	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
+//	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+//	_musicPlayer.numberOfLoops = -1;
+//	[_musicPlayer prepareToPlay];
+//	[_musicPlayer play];
 }
 
 - (void)connectServer
@@ -133,6 +134,8 @@
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
 			_animalType = (ZKAnimalType)[[data objectForKey:@"animaltype"] integerValue];
 			_animalIds = [[data objectForKey:@"animalids"] mutableCopy];
+			_spectatorTotal = [[data objectForKey:@"spectators"] integerValue];
+//			_happiness = [[data objectForKey:@"happiness"] integerValue];
 			
 			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
 			
