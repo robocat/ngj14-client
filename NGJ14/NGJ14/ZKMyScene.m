@@ -101,7 +101,7 @@
 	NSString *animalName = nil;
 	switch (animalType) {
 		case ZKAnimalTypeZebra:
-			animalName = @"Giraffe";
+			animalName = @"Zebra";
 			break;
 		case ZKAnimalTypeGiraffe:
 			animalName = @"Giraffe";

@@ -66,8 +66,8 @@
 - (void)startMenu
 {
 	SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
 	
     _menuScene = [ZKMenuScene sceneWithSize:skView.bounds.size];
     _menuScene.scaleMode = SKSceneScaleModeAspectFill;
