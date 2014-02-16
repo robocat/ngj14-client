@@ -42,6 +42,7 @@
 		FF12E41418B02196005F2BB3 /* ZKAnimal.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E41318B02196005F2BB3 /* ZKAnimal.m */; };
 		FF12E41618B0D655005F2BB3 /* orange_girl.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E41518B0D655005F2BB3 /* orange_girl.atlas */; };
 		FF12E41818B0D73D005F2BB3 /* girl_2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E41718B0D73D005F2BB3 /* girl_2.atlas */; };
+		FF12E41A18B0D92F005F2BB3 /* manman.atlas in Resources */ = {isa = PBXBuildFile; fileRef = FF12E41918B0D92F005F2BB3 /* manman.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		FF12E41318B02196005F2BB3 /* ZKAnimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKAnimal.m; sourceTree = "<group>"; };
 		FF12E41518B0D655005F2BB3 /* orange_girl.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = orange_girl.atlas; sourceTree = "<group>"; };
 		FF12E41718B0D73D005F2BB3 /* girl_2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = girl_2.atlas; sourceTree = "<group>"; };
+		FF12E41918B0D92F005F2BB3 /* manman.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = manman.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 		FF12E40818AFE138005F2BB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF12E41918B0D92F005F2BB3 /* manman.atlas */,
 				FF12E41718B0D73D005F2BB3 /* girl_2.atlas */,
 				FF12E41518B0D655005F2BB3 /* orange_girl.atlas */,
 				3EFA1EFC18B04B5900C0C174 /* theme.m4a */,
@@ -324,6 +327,7 @@
 				3E4F7B4718AFE75E00A303D3 /* RedMan.atlas in Resources */,
 				FF12E40B18B002B7005F2BB3 /* BadBubbles.atlas in Resources */,
 				3E4F7B3E18AFD11300A303D3 /* ManImages.atlas in Resources */,
+				FF12E41A18B0D92F005F2BB3 /* manman.atlas in Resources */,
 				3EFA1F0118B0569E00C0C174 /* Giraffe.atlas in Resources */,
 				FF12E40C18B002B7005F2BB3 /* GoodBubbles.atlas in Resources */,
 				3E4F7B4F18B00D7700A303D3 /* spark.png in Resources */,
