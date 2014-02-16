@@ -42,6 +42,7 @@
 		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
 		
+		[self setAnimalType:ZKAnimalTypeZebra count:3];
 		
 		self.happiness = 0.5;
 		
@@ -140,8 +141,6 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//	self.peopleCount = rand() % 10;
-	
 	UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
@@ -157,6 +156,9 @@
     }
 	
 	if ([node.name isEqualToString:@"animal"]) {
+		ZKAnimal *animal = (ZKAnimal *)node;
+		animal.dead = YES;
+		
 		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
 		SKEmitterNode *bloodEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
 		bloodEmitter.zPosition = self.fgImage.zPosition - 100;

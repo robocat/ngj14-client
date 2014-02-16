@@ -10,6 +10,9 @@
 
 @interface ZKAnimal : ZKEntity
 
+@property (assign, nonatomic) BOOL sick;
+@property (assign, nonatomic) BOOL dead;
+
 - (id)initWithPosition:(CGPoint)position atlas:(SKTextureAtlas *)atlas;
 
 - (void)performEvent;
