@@ -19,6 +19,7 @@
 @property (strong) SKSpriteNode *prKnob;
 
 @property (assign) BOOL isShowingEvent;
+@property (assign) BOOL animalsAreDancing;
 
 @property (strong, nonatomic) SKSpriteNode *confetti;
 
@@ -189,8 +190,6 @@
 	
 	for (SKNode *node in nodes) {
 	    if ([node.name isEqualToString:@"showButton"]) {
-			self.isShowingEvent = !self.isShowingEvent;
-			
 			if (self.isShowingEvent) {
 				[self.viewController makeEvent:self.isShowingEvent];
 			} else {
@@ -243,6 +242,8 @@
 	CGFloat distance = self.frame.size.width / (self.animals.count + 1);
 	
 	void (^finish)(void) = ^{
+		self.animalsAreDancing = YES;
+		
 		for (ZKAnimal *animal in self.animals) {
 			[animal performEvent];
 		}
@@ -277,6 +278,10 @@
 }
 
 - (void)endEvent {
+	if (!self.animalsAreDancing) {
+		return;
+	}
+	
 	self.isShowingEvent = NO;
 	
 	for (ZKAnimal *animal in self.animals) {

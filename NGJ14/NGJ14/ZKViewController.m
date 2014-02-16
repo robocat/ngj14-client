@@ -80,8 +80,6 @@
 - (void)startGame
 {
 	SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
     
     _gameScene = [ZKMyScene sceneWithSize:skView.bounds.size];
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
