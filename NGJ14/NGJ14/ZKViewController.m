@@ -58,8 +58,8 @@ typedef enum {
     [super viewDidLoad];
 	
 	[self startMenu];
-//	[self startGame];
-	[self connectServer];
+	[self startGame];
+//	[self connectServer];
 }
 
 - (void)connectServer
