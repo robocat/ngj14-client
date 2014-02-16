@@ -26,7 +26,7 @@
 
 - (id)initWithPosition:(CGPoint)position {
 	if ((self = [super initWithPosition:position])) {
-		NSArray *people = @[ @"ManImages", @"RedMan", @"girl" ];
+		NSArray *people = @[ @"ManImages", @"RedMan", @"girl", @"orange_girl", @"girl_2" ];
 		
 		SKTextureAtlas *manAtlas = [SKTextureAtlas atlasNamed:people[rand() % people.count]];
 		
