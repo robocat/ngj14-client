@@ -9,32 +9,6 @@
 #import "ZKViewController.h"
 #import "ZKMyScene.h"
 #import "ZKMenuScene.h"
-
-
-typedef enum {
-	ZKAnimalTypeZebra = 0,
-	ZKAnimalTypeGiraffe,
-	ZKAnimalTypeLion
-} ZKAnimalType;
-
-
-typedef enum {
-	ZKMessageTypeConnect = 1,
-	ZKMessageTypeResult,            // 2
-	ZKMessageTypeGameStart,         // 3
-	ZKMessageTypeAnimalKillRequest, // 4
-	ZKMessageTypeAnimalKillReply,   // 5
-	ZKMessageTypeMakeEventRequest,  // 6
-	ZKMessageTypeMakeEventReply,    // 7
-	ZKMessageTypeAnimalDead,        // 8
-	ZKMessageTypeAnimalSick,        // 9
-	ZKMessageTypeSpectator,         // 10
-	ZKMessageTypePRPoints,          // 11
-	ZKMessageTypeAnimalDiedInfo,    // 12
-	ZKMessageTypeHappiness,         // 13
-} ZKMessageType;
-
-
 #import "ZKConnection.h"
 
 
@@ -110,6 +84,8 @@ typedef enum {
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
 	_gameScene.viewController = self;
 	
+	[_gameScene setAnimalType:_animalType];
+	
 	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
     [skView presentScene:_gameScene transition:doors];
 }
@@ -159,6 +135,8 @@ typedef enum {
 			_animalType = [[data objectForKey:@"animaltype"] integerValue];
 			
 			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
+			
+			
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
@@ -169,6 +147,7 @@ typedef enum {
 		case ZKMessageTypeMakeEventRequest:
 			break;
 		case ZKMessageTypeMakeEventReply: {
+			[_gameScene doEvent];
 			break;
 		}
 		case ZKMessageTypeAnimalDead: {

@@ -43,15 +43,6 @@
 		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
 		
-		ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]];
-		animal1.name = @"animal";
-		[self.animals addObject:animal1];
-		
-		ZKAnimal *animal2 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]];
-		animal2.name = @"animal";
-		[self.animals addObject:animal2];
-		[self addChild:self.animals[0]];
-		[self addChild:self.animals[1]];
 		
 		self.happiness = 0.5;
 		
@@ -59,7 +50,7 @@
 		
 		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
 		self.spark = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
-		self.spark.zPosition = fgImage.zPosition -100;
+		self.spark.zPosition = self.frame.size.height - 1;
     }
 	
     return self;
@@ -80,6 +71,36 @@
 		[person walkTo:CGPointMake(person.position.x, 0)];
 		person.removeOnStop = YES;
 	}
+}
+
+
+- (void)setAnimalType:(ZKAnimalType)animalType
+{
+	NSString *animalName = nil;
+	switch (animalType) {
+		case ZKAnimalTypeZebra:
+			animalName = @"Zebra";
+			break;
+		case ZKAnimalTypeGiraffe:
+			animalName = @"Giraffe";
+			break;
+		case ZKAnimalTypeLion:
+			animalName = @"Lion";
+			break;
+		default:
+			animalName = @"Lion";
+			break;
+	}
+	
+	ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
+	animal1.name = @"animal";
+	[self.animals addObject:animal1];
+	
+	ZKAnimal *animal2 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
+	animal2.name = @"animal";
+	[self.animals addObject:animal2];
+	[self addChild:self.animals[0]];
+	[self addChild:self.animals[1]];
 }
 
 - (void)movePerson:(ZKPerson *)person {
@@ -134,7 +155,7 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	self.peopleCount = rand() % 10;
+//	self.peopleCount = rand() % 10;
 	
 	UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
@@ -144,7 +165,6 @@
 		self.isShowingEvent = !self.isShowingEvent;
 		
 		if (self.isShowingEvent) {
-			[self doEvent];
 			[self.viewController makeEvent:self.isShowingEvent];
 		} else {
 			[self endEvent];
