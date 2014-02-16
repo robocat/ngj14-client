@@ -12,9 +12,6 @@
 
 @interface ZKMenuScene ()
 
-@property (strong) SKEmitterNode *spark;
-@property (assign) NSInteger sparkTime;
-
 @property (strong, nonatomic) NSMutableArray *people;
 
 @end
@@ -31,35 +28,17 @@
 		
 		self.people = [NSMutableArray array];
 		
-		
-		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
-		_spark = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
     }
 	
     return self;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [touches anyObject];
-	
-	
-	if ([_spark parent] == nil) {
-		_sparkTime = 10;
-		[self addChild:_spark];
-		_spark.particleBirthRate = 20;
-		_spark.particleLifetime = 1;
-		_spark.particlePosition = [touch locationInNode:self];
-	}
+//	UITouch *touch = [touches anyObject];
 }
 
 - (void)update:(CFTimeInterval)currentTime {
-	if (_sparkTime > 0) {
-		_sparkTime--;
-	}
-	else {
-		_spark.particleLifetime = 0;
-		[_spark removeFromParent];
-	}
+
 }
 
 

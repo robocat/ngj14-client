@@ -12,6 +12,9 @@
 
 @interface ZKMyScene ()
 
+@property (strong) SKEmitterNode *spark;
+@property (assign) NSInteger sparkTime;
+
 @property (strong, nonatomic) NSMutableArray *people;
 @property (strong, nonatomic) NSMutableArray *animals;
 
@@ -40,8 +43,13 @@
 		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
 		
-		[self.animals addObject:[[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]]];
-		[self.animals addObject:[[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]]];
+		ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]];
+		animal1.name = @"animal";
+		[self.animals addObject:animal1];
+		
+		ZKAnimal *animal2 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:@"Zebra"]];
+		animal2.name = @"animal";
+		[self.animals addObject:animal2];
 		[self addChild:self.animals[0]];
 		[self addChild:self.animals[1]];
 		
@@ -50,6 +58,12 @@
 		
 		// Show button
 		[self addChild:[self showButtonNode]];
+		
+		
+		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
+		_spark = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+		_spark.zPosition = fgImage.zPosition -100;
+
     }
 	
     return self;
@@ -104,6 +118,16 @@
 			[self moveAnimal:animal];
 		}
 	}
+	
+	
+	
+	if (_sparkTime > 0) {
+		_sparkTime--;
+	}
+	else {
+		_spark.particleLifetime = 0;
+		[_spark removeFromParent];
+	}
 }
 
 - (CGPoint)randomVisitorPoint {
@@ -125,6 +149,16 @@
     if ([node.name isEqualToString:@"showButton"]) {
 		_isShowingEvent = !_isShowingEvent;
 		[_viewController makeEvent:_isShowingEvent];
+    }
+	
+	if ([node.name isEqualToString:@"animal"]) {
+		if ([_spark parent] == nil) {
+			_sparkTime = 10;
+			[self addChild:_spark];
+			_spark.particleBirthRate = 20;
+			_spark.particleLifetime = 1;
+			_spark.particlePosition = [touch locationInNode:self];
+		}
     }
 }
 

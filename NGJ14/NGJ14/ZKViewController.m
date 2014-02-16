@@ -142,7 +142,7 @@ typedef enum {
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
 			_animalType = [[data objectForKey:@"animaltype"] integerValue];
 			
-			[self performSelector:@selector(startGame) withObject:nil afterDelay:5];
+			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
