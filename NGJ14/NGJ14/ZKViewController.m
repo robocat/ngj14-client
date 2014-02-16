@@ -24,6 +24,8 @@
 @property (strong) NSString *gameName;
 @property (assign) ZKMessageType messageType;
 @property (assign) NSInteger participants;
+@property (assign) NSInteger spectatorTotal;
+@property (assign) CGFloat happiness;
 
 
 @property (strong) ZKMenuScene *menuScene;
@@ -64,8 +66,8 @@
 - (void)startMenu
 {
 	SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
 	
     _menuScene = [ZKMenuScene sceneWithSize:skView.bounds.size];
     _menuScene.scaleMode = SKSceneScaleModeAspectFill;
@@ -84,6 +86,8 @@
     _gameScene = [ZKMyScene sceneWithSize:skView.bounds.size];
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
 	_gameScene.viewController = self;
+	_gameScene.peopleCount = _spectatorTotal;
+	_gameScene.happiness = _happiness;
 	
 	[_gameScene setAnimalType:_animalType count:_animalCount animalIds:_animalIds];
 	
@@ -131,8 +135,10 @@
 		}
 		case ZKMessageTypeGameStart: {
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
-			_animalType = [[data objectForKey:@"animaltype"] integerValue];
+			_animalType = (ZKAnimalType)[[data objectForKey:@"animaltype"] integerValue];
 			_animalIds = [[data objectForKey:@"animalids"] mutableCopy];
+			_spectatorTotal = [[data objectForKey:@"spectators"] integerValue];
+			_happiness = [[data objectForKey:@"happiness"] floatValue];
 			
 			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
 			
@@ -179,10 +185,9 @@
 			break;
 		}
 		case ZKMessageTypeNewAnimal: {
-			NSInteger aCount = [[data objectForKey:@"animalcount"] integerValue];
-			NSInteger aType = [[data objectForKey:@"animaltype"] integerValue];
-			NSArray *aIds = [[data objectForKey:@"animalids"] mutableCopy];
-			[_gameScene newAnimalType:aType count:aCount animalIds:aIds];
+			ZKAnimalType aType = (ZKAnimalType)[[data objectForKey:@"animaltype"] integerValue];
+			NSArray *aIds = [[data objectForKey:@"animalid"] mutableCopy];
+			[_gameScene newAnimalType:aType count:0 animalIds:aIds];
 			break;
 		}
 		default:

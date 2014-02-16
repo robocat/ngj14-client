@@ -102,7 +102,7 @@
 			animalName = @"Zebra";
 			break;
 		case ZKAnimalTypeGiraffe:
-			animalName = @"Zebra";//Giraffe
+			animalName = @"Giraffe";
 			break;
 		case ZKAnimalTypeLion:
 			animalName = @"Lion";
@@ -117,6 +117,10 @@
 	animal1.animalId = [animalIds[count] integerValue];
 	[self.animals addObject:animal1];
 	[self addChild:animal1];
+	
+	if (_isShowingEvent) {
+		[animal1 performEvent];
+	}
 }
 
 
