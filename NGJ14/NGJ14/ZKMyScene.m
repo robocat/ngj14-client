@@ -251,15 +251,15 @@
 	
 	int i;
 	for (i = 0; i < self.animals.count; i++) {
+		NSUInteger count = self.animals.count;
+		
+		for (ZKAnimal *animal in self.animals) {
+			if (animal.dead) count--;
+		}
+		
 		ZKAnimal *animal = self.animals[i];
 		[animal walkTo:CGPointMake(distance * (i + 1), self.frame.size.height - 150) withCompletion:^{
 			finishes++;
-			
-			NSUInteger count = self.animals.count;
-			
-			for (ZKAnimal *animal in self.animals) {
-				if (animal.dead) count--;
-			}
 			
 			if (finishes == count) {
 				finish();
