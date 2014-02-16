@@ -21,6 +21,8 @@
 @property (assign, nonatomic) id<ZKAnimalDelegate> delegate;
 @property (assign, nonatomic) BOOL sick;
 @property (assign, nonatomic) BOOL dead;
+@property (assign) NSInteger health;
+@property (assign) NSInteger animalId;
 
 - (id)initWithPosition:(CGPoint)position atlas:(SKTextureAtlas *)atlas;
 

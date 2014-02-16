@@ -60,7 +60,7 @@
 		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
 		
-		[self setAnimalType:ZKAnimalTypeZebra count:3];
+//		[self setAnimalType:ZKAnimalTypeZebra count:3];
 		
 		self.happiness = 0.1;
 		
@@ -186,7 +186,13 @@
 
 
 - (void)killAnimal:(ZKAnimal *)animal atLocation:(CGPoint)location {
-	animal.dead = YES;
+	if (animal.health > 0) {
+		animal.health -= 25;
+	} else {
+		animal.dead = YES;
+		NSUInteger animalId = [_animals indexOfObject:animal];
+		[_viewController makeKill:animalId];
+	}
 	
 	NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
 	SKEmitterNode *bloodEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
@@ -201,6 +207,7 @@
 			[bloodEmitter removeFromParent];
 		}];
 	}];
+
 }
 
 - (SKSpriteNode *)showButtonNode {
