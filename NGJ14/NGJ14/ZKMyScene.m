@@ -41,12 +41,30 @@
 		
 		self.fgImage.zPosition = -320 + self.frame.size.height;
 		
+		
+		// PR
+		SKSpriteNode *prImage = [SKSpriteNode spriteNodeWithImageNamed:@"prbar"];
+//		prImage.anchorPoint = CGPointMake(0, 0);
+		prImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-46);
+		prImage.name = @"prBar";
+		prImage.zPosition = 1.0;
+		[self addChild:prImage];
+		
+		SKSpriteNode *prKnob = [SKSpriteNode spriteNodeWithImageNamed:@"prKnob"];
+		prKnob.anchorPoint = CGPointMake(0, 0);
+		prKnob.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-56);
+		prKnob.name = @"prKnob";
+		prKnob.zPosition = 1.0;
+		[self addChild:prKnob];
+
+		
+		
 		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
 		
-		[self setAnimalType:ZKAnimalTypeZebra count:3];
+//		[self setAnimalType:ZKAnimalTypeZebra count:3];
 		
-		self.happiness = 0.5;
+		self.happiness = 0.1;
 		
 		[self addChild:[self showButtonNode]];
     }
@@ -132,6 +150,10 @@
 			}
 		}
 	}
+	
+	if (_pr < 100) {
+		//
+	}
 }
 
 - (CGPoint)randomVisitorPoint {
@@ -145,42 +167,54 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+    NSArray *nodes = [self nodesAtPoint:location];
 	
-    if ([node.name isEqualToString:@"showButton"]) {
-		self.isShowingEvent = !self.isShowingEvent;
-		
-		if (self.isShowingEvent) {
-			[self.viewController makeEvent:self.isShowingEvent];
-			[self doEvent];
-		} else {
-			[self endEvent];
+	for (SKNode *node in nodes) {
+	    if ([node.name isEqualToString:@"showButton"]) {
+			self.isShowingEvent = !self.isShowingEvent;
+			
+			if (self.isShowingEvent) {
+				[self.viewController makeEvent:self.isShowingEvent];
+			} else {
+				[self endEvent];
+			}
 		}
-    }
-	
-	if ([node.name isEqualToString:@"animal"]) {
-		ZKAnimal *animal = (ZKAnimal *)node;
+		if ([node.name isEqualToString:@"animal"]) {
+			ZKAnimal *animal = (ZKAnimal *)node;
+			[self killAnimal:animal atLocation:location];
+		}
+	}
+}
+
+
+- (void)killAnimal:(ZKAnimal *)animal atLocation:(CGPoint)location {
+	if (animal.health > 0) {
+		animal.health -= 25;
+	} else {
 		animal.dead = YES;
-		
-		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
-		SKEmitterNode *bloodEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
-		bloodEmitter.zPosition = self.fgImage.zPosition - 100;
-		bloodEmitter.particlePosition = [touch locationInNode:self];
-		
-		[self addChild:bloodEmitter];
-		
-		[self runAction:[SKAction waitForDuration:0.1] completion:^{
-			bloodEmitter.particleBirthRate = 0;
-			[self runAction:[SKAction waitForDuration:.5] completion:^{
-				[bloodEmitter removeFromParent];
-			}];
+		NSUInteger animalId = [_animals indexOfObject:animal];
+		[_viewController makeKill:animalId];
+	}
+	
+	NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
+	SKEmitterNode *bloodEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+	bloodEmitter.zPosition = self.fgImage.zPosition - 100;
+	bloodEmitter.particlePosition = location;
+	
+	[self addChild:bloodEmitter];
+	
+	[self runAction:[SKAction waitForDuration:0.1] completion:^{
+		bloodEmitter.particleBirthRate = 0;
+		[self runAction:[SKAction waitForDuration:.5] completion:^{
+			[bloodEmitter removeFromParent];
 		}];
-    }
+	}];
+
 }
 
 - (SKSpriteNode *)showButtonNode {
     SKSpriteNode *showNode = [SKSpriteNode spriteNodeWithImageNamed:@"show"];
-    showNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-100);
+    showNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-150);
     showNode.name = @"showButton";
     showNode.zPosition = 1.0;
     return showNode;

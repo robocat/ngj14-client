@@ -37,5 +37,6 @@ typedef enum {
 @interface ZKViewController : UIViewController
 
 - (void)makeEvent:(BOOL)start;
+- (void)makeKill:(NSInteger)animalId;
 
 @end

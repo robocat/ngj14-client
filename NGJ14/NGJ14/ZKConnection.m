@@ -74,7 +74,7 @@
 						
 						
 						NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-						NSLog(@"str: <%@>", str);
+//						NSLog(@"str: <%@>", str);
 							  
 						for (NSString *s in [str componentsSeparatedByString:@"\n"]) {
 							if (s.length == 0) continue;
