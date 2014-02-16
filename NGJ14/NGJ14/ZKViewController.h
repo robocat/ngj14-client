@@ -29,8 +29,9 @@ typedef enum {
 	ZKMessageTypeAnimalSick,        // 9
 	ZKMessageTypeSpectator,         // 10
 	ZKMessageTypePRPoints,          // 11
-	ZKMessageTypeAnimalDiedInfo,    // 12
+	ZKMessageTypeAnimalDiedFromSickness,    // 12
 	ZKMessageTypeHappiness,         // 13
+	ZKMessageTypeNewAnimal,         // 14
 } ZKMessageType;
 
 

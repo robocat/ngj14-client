@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *animals;
 
 @property (strong, nonatomic) SKSpriteNode *fgImage;
+@property (strong) SKSpriteNode *prKnob;
 
 @property (assign) BOOL isShowingEvent;
 
@@ -48,13 +49,14 @@
 		prImage.zPosition = 1.0;
 		[self addChild:prImage];
 		
-		SKSpriteNode *prKnob = [SKSpriteNode spriteNodeWithImageNamed:@"prKnob"];
-		prKnob.anchorPoint = CGPointMake(0, 0);
-		prKnob.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-56);
-		prKnob.name = @"prKnob";
-		prKnob.zPosition = 1.0;
-		[self addChild:prKnob];
-
+		_prKnob = [SKSpriteNode spriteNodeWithImageNamed:@"prKnob"];
+		_prKnob.anchorPoint = CGPointMake(0, 0);
+		_prKnob.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-56);
+		_prKnob.name = @"prKnob";
+		_prKnob.zPosition = 1.0;
+		[self addChild:_prKnob];
+		
+		_prPoints = 150;
 		
 		
 		self.animals = [NSMutableArray array];
@@ -88,7 +90,8 @@
 }
 
 
-- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count
+
+- (void)newAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds
 {
 	NSString *animalName = nil;
 	switch (animalType) {
@@ -96,7 +99,7 @@
 			animalName = @"Zebra";
 			break;
 		case ZKAnimalTypeGiraffe:
-			animalName = @"Giraffe";
+			animalName = @"Zebra";//Giraffe
 			break;
 		case ZKAnimalTypeLion:
 			animalName = @"Lion";
@@ -106,11 +109,18 @@
 			break;
 	}
 	
+	ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
+	animal1.name = @"animal";
+	animal1.animalId = [animalIds[count] integerValue];
+	[self.animals addObject:animal1];
+	[self addChild:animal1];
+}
+
+
+- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds
+{
 	for (int i = 0; i < count; i++) {
-		ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
-		animal1.name = @"animal";
-		[self.animals addObject:animal1];
-		[self addChild:animal1];
+		[self newAnimalType:animalType count:i animalIds:animalIds];
 	}
 }
 
@@ -149,8 +159,8 @@
 		}
 	}
 	
-	if (_pr < 100) {
-		//
+	if (_prPoints <= 300) {
+		_prKnob.position = CGPointMake(_prPoints, CGRectGetMidY(self.frame)-56);
 	}
 }
 
@@ -190,8 +200,7 @@
 		animal.health -= 25;
 	} else {
 		animal.dead = YES;
-		NSUInteger animalId = [_animals indexOfObject:animal];
-		[_viewController makeKill:animalId];
+		[_viewController makeKill:animal.animalId];
 	}
 	
 	NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
@@ -252,6 +261,25 @@
 		[animal walkTo:[self randomAnimalPoint]];
 	}
 }
+
+- (void)animalSick:(NSInteger)animalId
+{
+	for (ZKAnimal *animal in _animals) {
+		if (animalId == animal.animalId) {
+			animal.sick = YES;
+		}
+	}
+}
+
+- (void)animalDead:(NSInteger)animalId
+{
+	for (ZKAnimal *animal in _animals) {
+		if (animalId == animal.animalId) {
+			animal.dead = YES;
+		}
+	}
+}
+
 
 #pragma mark - ZKAnimalDelegate
 

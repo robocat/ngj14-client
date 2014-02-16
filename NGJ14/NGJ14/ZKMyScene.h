@@ -21,15 +21,20 @@
  */
 @property (assign, nonatomic) NSUInteger peopleCount;
 
-@property (assign) NSInteger pr;
+@property (assign) NSInteger prPoints;
 
 //@property (assign) ZKAnimalType animalType;
 
 @property (weak) ZKViewController *viewController;
 
 
-- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count;
+- (void)newAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds;
+
+- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds;
 
 - (void)doEvent;
+
+- (void)animalSick:(NSInteger)animalId;
+- (void)animalDead:(NSInteger)animalId;
 
 @end

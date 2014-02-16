@@ -20,6 +20,7 @@
 
 @property (assign) NSInteger animalCount;
 @property (assign) ZKAnimalType animalType;
+@property (strong) NSMutableArray *animalIds;
 @property (strong) NSString *gameName;
 @property (assign) ZKMessageType messageType;
 @property (assign) NSInteger participants;
@@ -36,9 +37,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-//	[self startMenu];
-	[self startGame];
-//	[self connectServer];
+	[self startMenu];
+	[self connectServer];
+//	[self startGame];
 	
 
 //	NSError *error;
@@ -84,7 +85,7 @@
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
 	_gameScene.viewController = self;
 	
-	[_gameScene setAnimalType:_animalType count:_animalCount];
+	[_gameScene setAnimalType:_animalType count:_animalCount animalIds:_animalIds];
 	
 	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
     [skView presentScene:_gameScene transition:doors];
@@ -125,16 +126,15 @@
 			break;
 		case ZKMessageTypeResult: {
 			_participants = [[data objectForKey:@"participants"] integerValue];
-			_menuScene.peopleCount = _participants++;
 			_menuScene.peopleCount = _participants;
 			break;
 		}
 		case ZKMessageTypeGameStart: {
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
 			_animalType = [[data objectForKey:@"animaltype"] integerValue];
+			_animalIds = [[data objectForKey:@"animalids"] mutableCopy];
 			
 			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
-			
 			
 			break;
 		}
@@ -150,11 +150,12 @@
 			break;
 		}
 		case ZKMessageTypeAnimalDead: {
-//			animatId = [[data objectForKey:@"animalid"] integerValue];
+
 			break;
 		}
 		case ZKMessageTypeAnimalSick: {
-//			animatId = [[data objectForKey:@"animalid"] integerValue];
+			NSInteger animalId = [[data objectForKey:@"animalid"] integerValue];
+			[_gameScene animalSick:animalId];
 			break;
 		}
 		case ZKMessageTypeSpectator: {
@@ -163,11 +164,13 @@
 			break;
 		}
 		case ZKMessageTypePRPoints: {
-//			prPoints = [[data objectForKey:@"totalcount"] integerValue];
+			NSInteger prPoints = [[data objectForKey:@"totalcount"] integerValue];
+			_gameScene.prPoints = prPoints;
 			break;
 		}
-		case ZKMessageTypeAnimalDiedInfo: {
-			//			prPoints = [[data objectForKey:@"totalcount"] integerValue];
+		case ZKMessageTypeAnimalDiedFromSickness: {
+			NSInteger animalId = [[data objectForKey:@"animalid"] integerValue];
+			[_gameScene animalDead:animalId];
 			break;
 		}
 		case ZKMessageTypeHappiness: {
@@ -175,11 +178,13 @@
 			_gameScene.happiness = happiness;
 			break;
 		}
-//		case ZKMessageTypeHappiness: {
-//			CGFloat happiness = [[data objectForKey:@"happiness"] floatValue];
-//			_gameScene.happiness = happiness;
-//			break;
-//		}
+		case ZKMessageTypeNewAnimal: {
+			NSInteger aCount = [[data objectForKey:@"animalcount"] integerValue];
+			NSInteger aType = [[data objectForKey:@"animaltype"] integerValue];
+			NSArray *aIds = [[data objectForKey:@"animalids"] mutableCopy];
+			[_gameScene newAnimalType:aType count:aCount animalIds:aIds];
+			break;
+		}
 		default:
 			break;
 	}
