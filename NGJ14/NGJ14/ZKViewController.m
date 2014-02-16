@@ -12,7 +12,7 @@
 #import "ZKConnection.h"
 
 
-@interface ZKViewController () <ZKConnectionDelegate>
+@interface ZKViewController () <ZKConnectionDelegate, UIAlertViewDelegate>
 
 @property (strong) AVAudioPlayer *musicPlayer;
 
@@ -44,17 +44,23 @@
 //	[self startGame];
 	
 
-//	NSError *error;
-//	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
-//	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
-//	_musicPlayer.numberOfLoops = -1;
-//	[_musicPlayer prepareToPlay];
-//	[_musicPlayer play];
+	NSError *error;
+	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
+	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+	_musicPlayer.numberOfLoops = -1;
+	[_musicPlayer prepareToPlay];
+	[_musicPlayer play];
 }
 
 - (void)connectServer
 {
-	NSString *ip = @"172.30.214.64";
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connect to server" message:nil delegate:self cancelButtonTitle:@"Connect" otherButtonTitles:nil];
+	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+	[alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	NSString *ip = [[alertView textFieldAtIndex:0] text];
 	NSInteger port = 3456;
 	
 	_connection = [[ZKConnection alloc] initWithHost:ip port:port];
