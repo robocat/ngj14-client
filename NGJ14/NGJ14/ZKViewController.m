@@ -36,9 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[self startMenu];
-//	[self startGame];
-	[self connectServer];
+//	[self startMenu];
+	[self startGame];
+//	[self connectServer];
 	
 
 //	NSError *error;

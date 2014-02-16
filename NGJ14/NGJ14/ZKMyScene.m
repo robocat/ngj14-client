@@ -10,13 +10,12 @@
 #import "ZKPerson.h"
 #import "ZKAnimal.h"
 
-@interface ZKMyScene ()
-
-@property (strong) SKEmitterNode *spark;
-@property (assign) NSInteger sparkTime;
+@interface ZKMyScene () <ZKAnimalDelegate>
 
 @property (strong, nonatomic) NSMutableArray *people;
 @property (strong, nonatomic) NSMutableArray *animals;
+
+@property (strong, nonatomic) SKSpriteNode *fgImage;
 
 @property (assign) BOOL isShowingEvent;
 
@@ -33,12 +32,12 @@
 		ground.position = CGPointMake(0, self.frame.size.height - 320);
 		[self addChild:ground];
 		
-		SKSpriteNode *fgImage = [SKSpriteNode spriteNodeWithImageNamed:@"fg"];
-		fgImage.anchorPoint = CGPointMake(0, 0);
-		fgImage.position = CGPointMake(0, self.frame.size.height - 320);
-		[self addChild:fgImage];
+		self.fgImage = [SKSpriteNode spriteNodeWithImageNamed:@"fg"];
+		self.fgImage.anchorPoint = CGPointMake(0, 0);
+		self.fgImage.position = CGPointMake(0, self.frame.size.height - 320);
+		[self addChild:self.fgImage];
 		
-		fgImage.zPosition = -320 + self.frame.size.height;
+		self.fgImage.zPosition = -320 + self.frame.size.height;
 		
 		
 		// PR
@@ -61,14 +60,11 @@
 		self.animals = [NSMutableArray array];
 		self.people = [NSMutableArray array];
 		
+		[self setAnimalType:ZKAnimalTypeZebra count:3];
 		
 		self.happiness = 0.1;
 		
 		[self addChild:[self showButtonNode]];
-		
-		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
-		self.spark = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
-		self.spark.zPosition = self.frame.size.height - 1;
     }
 	
     return self;
@@ -156,14 +152,6 @@
 	if (_pr < 100) {
 		//
 	}
-	
-	
-	if (self.sparkTime > 0) {
-		self.sparkTime--;
-	} else {
-		self.spark.particleLifetime = 0;
-		[self.spark removeFromParent];
-	}
 }
 
 - (CGPoint)randomVisitorPoint {
@@ -175,8 +163,6 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//	self.peopleCount = rand() % 10;
-	
 	UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     NSArray *nodes = [self nodesAtPoint:location];
@@ -191,32 +177,30 @@
 				[self endEvent];
 			}
 		}
-		
 		if ([node.name isEqualToString:@"animal"]) {
 			ZKAnimal *animal = (ZKAnimal *)node;
-			[self killAnimal:animal];
-			
-			
-			if ([self.spark parent] == nil) {
-				self.sparkTime = 10;
-				[self addChild:_spark];
-				self.spark.particleBirthRate = 20;
-				self.spark.particleLifetime = 1;
-				self.spark.particlePosition = [touch locationInNode:self];
-			}
+			[self killAnimal:animal atLocation:location];
 		}
 	}
 }
 
 
-- (void)killAnimal:(ZKAnimal *)animal {
-	if (animal.health > 0) {
-		animal.health -= 25;
-	} else {
-		NSUInteger animalId = [_animals indexOfObject:animal];
-		[_viewController makeKill:animalId];
-		[animal removeFromParent];
-	}
+- (void)killAnimal:(ZKAnimal *)animal atLocation:(CGPoint)location {
+	animal.dead = YES;
+	
+	NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
+	SKEmitterNode *bloodEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+	bloodEmitter.zPosition = self.fgImage.zPosition - 100;
+	bloodEmitter.particlePosition = location;
+	
+	[self addChild:bloodEmitter];
+	
+	[self runAction:[SKAction waitForDuration:0.1] completion:^{
+		bloodEmitter.particleBirthRate = 0;
+		[self runAction:[SKAction waitForDuration:.5] completion:^{
+			[bloodEmitter removeFromParent];
+		}];
+	}];
 }
 
 - (SKSpriteNode *)showButtonNode {
@@ -260,6 +244,12 @@
 		[animal stopEvent];
 		[animal walkTo:[self randomAnimalPoint]];
 	}
+}
+
+#pragma mark - ZKAnimalDelegate
+
+- (void)animalWasRemoved:(ZKAnimal *)animal {
+	[self.animals removeObject:animal];
 }
 
 @end
