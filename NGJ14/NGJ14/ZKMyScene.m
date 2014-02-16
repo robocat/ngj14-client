@@ -19,6 +19,8 @@
 
 @property (assign) BOOL isShowingEvent;
 
+@property (strong, nonatomic) SKSpriteNode *confetti;
+
 @end
 
 @implementation ZKMyScene
@@ -150,6 +152,7 @@
 		
 		if (self.isShowingEvent) {
 			[self.viewController makeEvent:self.isShowingEvent];
+			[self doEvent];
 		} else {
 			[self endEvent];
 		}
@@ -192,6 +195,13 @@
 		for (ZKAnimal *animal in self.animals) {
 			[animal performEvent];
 		}
+		
+		self.confetti = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"confetti1"]];
+		[self.confetti runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:@[ [SKTexture textureWithImageNamed:@"confetti1"], [SKTexture textureWithImageNamed:@"confetti2"] ] timePerFrame:0.5]]];
+		self.confetti.anchorPoint = CGPointMake(0, 0);
+		self.confetti.position = CGPointMake(0, self.frame.size.height - 320);
+		[self addChild:self.confetti];
+		self.confetti.zPosition = 10000;
 	};
 	
 	__block int finishes = 0;
@@ -202,7 +212,13 @@
 		[animal walkTo:CGPointMake(distance * (i + 1), self.frame.size.height - 150) withCompletion:^{
 			finishes++;
 			
-			if (finishes == self.animals.count) {
+			NSUInteger count = self.animals.count;
+			
+			for (ZKAnimal *animal in self.animals) {
+				if (animal.dead) count--;
+			}
+			
+			if (finishes == count) {
 				finish();
 			}
 		}];
@@ -216,6 +232,9 @@
 		[animal stopEvent];
 		[animal walkTo:[self randomAnimalPoint]];
 	}
+	
+	[self.confetti removeFromParent];
+	self.confetti = nil;
 }
 
 #pragma mark - ZKAnimalDelegate
