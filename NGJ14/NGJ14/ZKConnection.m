@@ -65,26 +65,32 @@
 			if (aStream == self.inputStream) {
 				uint8_t buffer[1024];
 				
-				NSMutableData *data = [NSMutableData data];
-				
 				while ([self.inputStream hasBytesAvailable]) {
 					int len = [self.inputStream read:buffer maxLength:sizeof(buffer)];
 					if (len > 0) {
+						NSMutableData *data = [NSMutableData data];
+						
 						[data appendBytes:buffer length:len];
+						
+						
+						NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						NSLog(@"str: <%@>", str);
+							  
+						for (NSString *s in [str componentsSeparatedByString:@"\n"]) {
+							if (s.length == 0) continue;
+							
+							NSError *error;
+							id obj = [NSJSONSerialization JSONObjectWithData:[s dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+							
+							if (error) {
+								NSLog(@"Invalid data: %@", error);
+							}
+							
+							if (self.delegate && [self.delegate respondsToSelector:@selector(conneciton:didGetData:)]) {
+								[self.delegate conneciton:self didGetData:obj];
+							}
+						}
 					}
-				}
-				
-				NSLog(@"str: <%@>", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-				
-				NSError *error;
-				id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-				
-				if (error) {
-					NSLog(@"Invalid data: %@", error);
-				}
-				
-				if (self.delegate && [self.delegate respondsToSelector:@selector(conneciton:didGetData:)]) {
-					[self.delegate conneciton:self didGetData:obj];
 				}
 			}
 			break;
