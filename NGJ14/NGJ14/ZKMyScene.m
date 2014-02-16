@@ -74,7 +74,7 @@
 }
 
 
-- (void)setAnimalType:(ZKAnimalType)animalType
+- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count
 {
 	NSString *animalName = nil;
 	switch (animalType) {
@@ -92,15 +92,12 @@
 			break;
 	}
 	
-	ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
-	animal1.name = @"animal";
-	[self.animals addObject:animal1];
-	
-	ZKAnimal *animal2 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
-	animal2.name = @"animal";
-	[self.animals addObject:animal2];
-	[self addChild:self.animals[0]];
-	[self addChild:self.animals[1]];
+	for (int i = 0; i < count; i++) {
+		ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
+		animal1.name = @"animal";
+		[self.animals addObject:animal1];
+		[self addChild:animal1];
+	}
 }
 
 - (void)movePerson:(ZKPerson *)person {

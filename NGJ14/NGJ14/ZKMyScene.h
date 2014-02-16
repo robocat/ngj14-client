@@ -26,7 +26,7 @@
 @property (weak) ZKViewController *viewController;
 
 
-- (void)setAnimalType:(ZKAnimalType)animalType;
+- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count;
 
 - (void)doEvent;
 

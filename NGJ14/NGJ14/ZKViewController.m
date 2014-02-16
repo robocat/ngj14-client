@@ -84,7 +84,7 @@
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
 	_gameScene.viewController = self;
 	
-	[_gameScene setAnimalType:_animalType];
+	[_gameScene setAnimalType:_animalType count:_animalCount];
 	
 	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
     [skView presentScene:_gameScene transition:doors];
