@@ -26,7 +26,7 @@
 
 - (id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
-		srand(time(NULL));
+		srand((int)time(NULL));
 		
 		SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"savanna_ground"];
 		ground.anchorPoint = CGPointMake(0, 0);
@@ -55,15 +55,11 @@
 		
 		self.happiness = 0.5;
 		
-		
-		// Show button
 		[self addChild:[self showButtonNode]];
 		
-		
 		NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Spark" ofType:@"sks"];
-		_spark = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
-		_spark.zPosition = fgImage.zPosition -100;
-
+		self.spark = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+		self.spark.zPosition = fgImage.zPosition -100;
     }
 	
     return self;
@@ -119,14 +115,11 @@
 		}
 	}
 	
-	
-	
-	if (_sparkTime > 0) {
-		_sparkTime--;
-	}
-	else {
-		_spark.particleLifetime = 0;
-		[_spark removeFromParent];
+	if (self.sparkTime > 0) {
+		self.sparkTime--;
+	} else {
+		self.spark.particleLifetime = 0;
+		[self.spark removeFromParent];
 	}
 }
 
@@ -145,37 +138,31 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 	
-    // show button touched
     if ([node.name isEqualToString:@"showButton"]) {
-		_isShowingEvent = !_isShowingEvent;
-		[_viewController makeEvent:_isShowingEvent];
+		self.isShowingEvent = !self.isShowingEvent;
+		[self.viewController makeEvent:self.isShowingEvent];
     }
 	
 	if ([node.name isEqualToString:@"animal"]) {
-		if ([_spark parent] == nil) {
-			_sparkTime = 10;
+		if ([self.spark parent] == nil) {
+			self.sparkTime = 10;
 			[self addChild:_spark];
-			_spark.particleBirthRate = 20;
-			_spark.particleLifetime = 1;
-			_spark.particlePosition = [touch locationInNode:self];
+			self.spark.particleBirthRate = 20;
+			self.spark.particleLifetime = 1;
+			self.spark.particlePosition = [touch locationInNode:self];
 		}
     }
 }
 
-
-- (SKSpriteNode *)showButtonNode
-{
+- (SKSpriteNode *)showButtonNode {
     SKSpriteNode *showNode = [SKSpriteNode spriteNodeWithImageNamed:@"show"];
-    showNode.position = CGPointMake(CGRectGetMidX(self.frame),
-									CGRectGetMidY(self.frame)-100);
+    showNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-100);
     showNode.name = @"showButton";
     showNode.zPosition = 1.0;
     return showNode;
 }
 
-
-- (void)doEvent
-{
+- (void)doEvent {
 	
 }
 
