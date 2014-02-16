@@ -27,6 +27,8 @@
 
 @property (weak) ZKViewController *viewController;
 
+@property (assign) BOOL isShowingEvent;
+
 
 - (void)newAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds;
 

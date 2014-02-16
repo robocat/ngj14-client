@@ -18,8 +18,6 @@
 @property (strong, nonatomic) SKSpriteNode *fgImage;
 @property (strong) SKSpriteNode *prKnob;
 
-@property (assign) BOOL isShowingEvent;
-
 @property (strong, nonatomic) SKSpriteNode *confetti;
 
 @end
