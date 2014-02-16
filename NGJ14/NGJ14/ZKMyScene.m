@@ -116,6 +116,10 @@
 	animal1.animalId = [animalIds[count] integerValue];
 	[self.animals addObject:animal1];
 	[self addChild:animal1];
+	
+	if (_isShowingEvent) {
+		[animal1 performEvent];
+	}
 }
 
 

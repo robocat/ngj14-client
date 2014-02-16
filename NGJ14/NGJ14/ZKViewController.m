@@ -131,7 +131,7 @@
 		}
 		case ZKMessageTypeGameStart: {
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
-			_animalType = [[data objectForKey:@"animaltype"] integerValue];
+			_animalType = (ZKAnimalType)[[data objectForKey:@"animaltype"] integerValue];
 			_animalIds = [[data objectForKey:@"animalids"] mutableCopy];
 			
 			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
@@ -179,10 +179,9 @@
 			break;
 		}
 		case ZKMessageTypeNewAnimal: {
-			NSInteger aCount = [[data objectForKey:@"animalcount"] integerValue];
-			NSInteger aType = [[data objectForKey:@"animaltype"] integerValue];
-			NSArray *aIds = [[data objectForKey:@"animalids"] mutableCopy];
-			[_gameScene newAnimalType:aType count:aCount animalIds:aIds];
+			ZKAnimalType aType = (ZKAnimalType)[[data objectForKey:@"animaltype"] integerValue];
+			NSArray *aIds = [[data objectForKey:@"animalid"] mutableCopy];
+			[_gameScene newAnimalType:aType count:0 animalIds:aIds];
 			break;
 		}
 		default:
