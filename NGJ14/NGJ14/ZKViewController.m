@@ -67,12 +67,12 @@ typedef enum {
 	[self connectServer];
 	
 
-	NSError *error;
-	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
-	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
-	_musicPlayer.numberOfLoops = -1;
-	[_musicPlayer prepareToPlay];
-	[_musicPlayer play];
+//	NSError *error;
+//	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
+//	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+//	_musicPlayer.numberOfLoops = -1;
+//	[_musicPlayer prepareToPlay];
+//	[_musicPlayer play];
 }
 
 - (void)connectServer

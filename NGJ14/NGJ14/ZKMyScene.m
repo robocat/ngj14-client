@@ -107,11 +107,13 @@
 		}
 	}
 	
-	for (ZKAnimal *animal in self.animals) {
-		animal.zPosition = -animal.position.y + self.frame.size.height;
-		
-		if (rand() % 100 == 0) {
-			[self moveAnimal:animal];
+	if (!self.isShowingEvent) {
+		for (ZKAnimal *animal in self.animals) {
+			animal.zPosition = -animal.position.y + self.frame.size.height;
+			
+			if (rand() % 100 == 0) {
+				[self moveAnimal:animal];
+			}
 		}
 	}
 	
@@ -140,7 +142,13 @@
 	
     if ([node.name isEqualToString:@"showButton"]) {
 		self.isShowingEvent = !self.isShowingEvent;
-		[self.viewController makeEvent:self.isShowingEvent];
+		
+		if (self.isShowingEvent) {
+			[self doEvent];
+			[self.viewController makeEvent:self.isShowingEvent];
+		} else {
+			[self endEvent];
+		}
     }
 	
 	if ([node.name isEqualToString:@"animal"]) {
@@ -163,7 +171,38 @@
 }
 
 - (void)doEvent {
+	self.isShowingEvent = YES;
 	
+	CGFloat distance = self.frame.size.width / (self.animals.count + 1);
+	
+	void (^finish)(void) = ^{
+		for (ZKAnimal *animal in self.animals) {
+			[animal performEvent];
+		}
+	};
+	
+	__block int finishes = 0;
+	
+	int i;
+	for (i = 0; i < self.animals.count; i++) {
+		ZKAnimal *animal = self.animals[i];
+		[animal walkTo:CGPointMake(distance * (i + 1), self.frame.size.height - 150) withCompletion:^{
+			finishes++;
+			
+			if (finishes == self.animals.count) {
+				finish();
+			}
+		}];
+	}
+}
+
+- (void)endEvent {
+	self.isShowingEvent = NO;
+	
+	for (ZKAnimal *animal in self.animals) {
+		[animal stopEvent];
+		[animal walkTo:[self randomAnimalPoint]];
+	}
 }
 
 @end

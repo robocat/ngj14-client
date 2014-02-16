@@ -8,6 +8,8 @@
 
 #import "ZKAnimal.h"
 
+#define EVENT_ACTION @"EVENT_ACTION"
+
 @interface ZKAnimal ()
 
 @property (strong, nonatomic) SKTexture *texture1;
@@ -47,13 +49,15 @@
 	return nil;
 }
 
-
-- (SKAction *)doEvent
-{
-	NSArray *eventFrames = @[ _texture1, _texture3 ];
+- (void)performEvent {
+	CGFloat time = 0.4;
+	SKAction *action = [SKAction repeatActionForever:[SKAction animateWithTextures:@[ self.texture1, self.texture3 ] timePerFrame:time resize:YES restore:YES]];
 	
-	CGFloat time = 0.2;
-	
-	return [SKAction repeatActionForever:[SKAction animateWithTextures:eventFrames timePerFrame:time resize:NO restore:YES]];
+	[self runAction:action withKey:EVENT_ACTION];
 }
+
+- (void)stopEvent {
+	[self removeActionForKey:EVENT_ACTION];
+}
+
 @end

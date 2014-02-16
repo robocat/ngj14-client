@@ -23,6 +23,7 @@ typedef enum {
 - (id)initWithPosition:(CGPoint)position;
 
 - (void)walkTo:(CGPoint)target;
+- (void)walkTo:(CGPoint)target withCompletion:(void (^)(void))completion;
 
 - (SKAction *)actionForDirection:(ZKWalkingDirection)direction;
 - (SKTexture *)standingTextureForDirection:(ZKWalkingDirection)direction;

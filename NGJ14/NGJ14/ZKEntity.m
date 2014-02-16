@@ -14,6 +14,7 @@
 
 @property (assign, nonatomic) ZKWalkingDirection direction;
 @property (strong, nonatomic) NSValue *nextTarget;
+@property (copy, nonatomic) void (^nextCompletion)(void);
 @property (assign, nonatomic, getter = isWalking) BOOL walking;
 
 @end
@@ -49,8 +50,13 @@
 }
 
 - (void)walkTo:(CGPoint)target {
+	[self walkTo:target withCompletion:nil];
+}
+
+- (void)walkTo:(CGPoint)target withCompletion:(void (^)(void))completion {
 	if (self.walking) {
 		self.nextTarget = [NSValue valueWithCGPoint:target];
+		self.nextCompletion = completion;
 		return;
 	}
 	
@@ -67,10 +73,13 @@
 	
 	[self runAction:[SKAction moveTo:target duration:dist / 50] completion:^{
 		[self stopWalking];
-		
 		self.walking = NO;
+		
+		if (completion) completion();
+		
 		if (self.nextTarget) {
-			[self walkTo:[self.nextTarget CGPointValue]];
+			[self walkTo:[self.nextTarget CGPointValue] withCompletion:self.nextCompletion];
+			self.nextCompletion = nil;
 			self.nextTarget = nil;
 		} else if (self.removeOnStop) {
 			[self removeFromParent];
