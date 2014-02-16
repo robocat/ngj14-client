@@ -8,6 +8,31 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
+#import <AVFoundation/AVFoundation.h>
+
+typedef enum {
+	ZKAnimalTypeZebra = 0,
+	ZKAnimalTypeGiraffe,
+	ZKAnimalTypeLion
+} ZKAnimalType;
+
+
+typedef enum {
+	ZKMessageTypeConnect = 1,
+	ZKMessageTypeResult,            // 2
+	ZKMessageTypeGameStart,         // 3
+	ZKMessageTypeAnimalKillRequest, // 4
+	ZKMessageTypeAnimalKillReply,   // 5
+	ZKMessageTypeMakeEventRequest,  // 6
+	ZKMessageTypeMakeEventReply,    // 7
+	ZKMessageTypeAnimalDead,        // 8
+	ZKMessageTypeAnimalSick,        // 9
+	ZKMessageTypeSpectator,         // 10
+	ZKMessageTypePRPoints,          // 11
+	ZKMessageTypeAnimalDiedInfo,    // 12
+	ZKMessageTypeHappiness,         // 13
+} ZKMessageType;
+
 
 @interface ZKViewController : UIViewController
 

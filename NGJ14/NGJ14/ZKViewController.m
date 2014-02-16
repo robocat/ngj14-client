@@ -9,33 +9,12 @@
 #import "ZKViewController.h"
 #import "ZKMyScene.h"
 #import "ZKMenuScene.h"
-
-
-typedef enum {
-	ZKAnimalTypeZebra = 0,
-	ZKAnimalTypeGiraffe,
-	ZKAnimalTypeLion
-} ZKAnimalType;
-
-
-typedef enum {
-	ZKMessageTypeConnect = 1,
-	ZKMessageTypeResult,            // 2
-	ZKMessageTypeGameStart,         // 3
-	ZKMessageTypeAnimalKillRequest, // 4
-	ZKMessageTypeAnimalKillReply,   // 5
-	ZKMessageTypeMakeEventRequest,  // 6
-	ZKMessageTypeMakeEventReply,    // 7
-	ZKMessageTypeAnimalDead,        // 8
-	ZKMessageTypeAnimalSick,        // 9
-	ZKMessageTypeSpectator,         // 10
-	ZKMessageTypePRPoints,          // 11
-} ZKMessageType;
-
-
 #import "ZKConnection.h"
 
+
 @interface ZKViewController () <ZKConnectionDelegate>
+
+@property (strong) AVAudioPlayer *musicPlayer;
 
 @property (strong) ZKConnection *connection;
 
@@ -58,8 +37,16 @@ typedef enum {
     [super viewDidLoad];
 	
 	[self startMenu];
-	[self startGame];
-//	[self connectServer];
+//	[self startGame];
+	[self connectServer];
+	
+
+//	NSError *error;
+//	NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"theme" withExtension:@"m4a"];
+//	_musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+//	_musicPlayer.numberOfLoops = -1;
+//	[_musicPlayer prepareToPlay];
+//	[_musicPlayer play];
 }
 
 - (void)connectServer
@@ -97,6 +84,8 @@ typedef enum {
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
 	_gameScene.viewController = self;
 	
+	[_gameScene setAnimalType:_animalType count:_animalCount];
+	
 	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:1];
     [skView presentScene:_gameScene transition:doors];
 }
@@ -114,6 +103,11 @@ typedef enum {
 	[_connection sendData:@{ @"msgtype": [NSString stringWithFormat:@"%d", ZKMessageTypeMakeEventRequest], @"start": @(start) }];
 }
 
+- (void)makeKill:(NSInteger)animalId
+{
+	[_connection sendData:@{ @"msgtype": [NSString stringWithFormat:@"%d", ZKMessageTypeAnimalKillRequest], @"id": @(animalId) }];
+}
+
 
 #pragma mark - Connection delegate
 
@@ -129,57 +123,47 @@ typedef enum {
 	switch (msgType) {
 		case ZKMessageTypeConnect:
 			break;
-		case ZKMessageTypeResult:
-		{
+		case ZKMessageTypeResult: {
 			_participants = [[data objectForKey:@"participants"] integerValue];
 			_menuScene.peopleCount = _participants++;
 			_menuScene.peopleCount = _participants++;
 			_menuScene.peopleCount = _participants;
 			break;
 		}
-		case ZKMessageTypeGameStart:
-		{
+		case ZKMessageTypeGameStart: {
 			_animalCount = [[data objectForKey:@"animalcount"] integerValue];
 			_animalType = [[data objectForKey:@"animaltype"] integerValue];
 			
 			[self performSelector:@selector(startGame) withObject:nil afterDelay:3];
+			
+			
 			break;
 		}
 		case ZKMessageTypeAnimalKillRequest:
-		{
-			
 			break;
-		}
-		case ZKMessageTypeAnimalKillReply:
-		{
-			
+		case ZKMessageTypeAnimalKillReply: {
 			break;
 		}
 		case ZKMessageTypeMakeEventRequest:
 			break;
-		case ZKMessageTypeMakeEventReply:
-		{
+		case ZKMessageTypeMakeEventReply: {
+			[_gameScene doEvent];
+			break;
+		}
+		case ZKMessageTypeAnimalDead: {
 			
 			break;
 		}
-		case ZKMessageTypeAnimalDead:
-		{
-			
-			break;
-		}
-		case ZKMessageTypeAnimalSick:
-		{
+		case ZKMessageTypeAnimalSick: {
 //			animatId = [[data objectForKey:@"id"] integerValue];
 			break;
 		}
-		case ZKMessageTypeSpectator:
-		{
+		case ZKMessageTypeSpectator: {
 			NSInteger spectatorTotal = [[data objectForKey:@"totalcount"] integerValue];
 			_gameScene.peopleCount = spectatorTotal;
 			break;
 		}
-		case ZKMessageTypePRPoints:
-		{
+		case ZKMessageTypePRPoints: {
 //			prPoints = [[data objectForKey:@"totalcount"] integerValue];
 			break;
 		}

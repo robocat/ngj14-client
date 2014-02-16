@@ -21,9 +21,12 @@
  */
 @property (assign, nonatomic) NSUInteger peopleCount;
 
-
+//@property (assign) ZKAnimalType animalType;
 
 @property (weak) ZKViewController *viewController;
+
+
+- (void)setAnimalType:(ZKAnimalType)animalType count:(NSInteger)count;
 
 - (void)doEvent;
 
