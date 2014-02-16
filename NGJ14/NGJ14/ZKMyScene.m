@@ -42,6 +42,10 @@
 		
 		self.fgImage.zPosition = -320 + self.frame.size.height;
 		
+		SKSpriteNode *tree = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"tree"]];
+		tree.anchorPoint = CGPointMake(0.5, 0);
+		tree.position = CGPointMake(50, self.frame.size.height - 125);
+		[self addChild:tree];
 		
 		// PR
 		SKSpriteNode *prImage = [SKSpriteNode spriteNodeWithImageNamed:@"prbar"];
@@ -93,8 +97,7 @@
 
 
 
-- (void)newAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds
-{
+- (void)newAnimalType:(ZKAnimalType)animalType count:(NSInteger)count animalIds:(NSArray *)animalIds {
 	NSString *animalName = nil;
 	switch (animalType) {
 		case ZKAnimalTypeZebra:
@@ -111,7 +114,7 @@
 			break;
 	}
 	
-	ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:CGPointMake(160, 400) atlas:[SKTextureAtlas atlasNamed:animalName]];
+	ZKAnimal *animal1 = [[ZKAnimal alloc] initWithPosition:[self randomAnimalPoint] atlas:[SKTextureAtlas atlasNamed:animalName]];
 	animal1.name = @"animal";
 	animal1.animalId = [animalIds[count] integerValue];
 	[self.animals addObject:animal1];
@@ -175,7 +178,10 @@
 }
 
 - (CGPoint)randomAnimalPoint {
-	return CGPointMake(rand() % (320 - 100) + 50, self.frame.size.height - (rand() % (320 - 120) + 50));
+	CGPoint point = CGPointMake(rand() % (320 - 100) + 50, self.frame.size.height - (rand() % (320 - 120) + 50));
+	
+	if (point.x < 100 && point.y > self.frame.size.height - 100) point = [self randomAnimalPoint];
+	return point;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
